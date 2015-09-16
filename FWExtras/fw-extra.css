@@ -3,6 +3,20 @@
     color: white;
     width: 10px;
     height: 10px;
-    margin: 0;
+    margin-left: 5px;
     cursor: pointer;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: green;
+    color: white;
+    padding: 5px;
+    margin: 0px;
+    cursor: pointer;
+}
+.toggle-button.off {
+    background: red;
 }

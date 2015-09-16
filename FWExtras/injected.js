@@ -254,6 +254,9 @@ function processResponse(serverResponse)
 	function submitChatMessage() {
 		console.log("Starting submission of chat message...");
 		if(sendButtonType === "button") {
+
+
+
 			jQuery.post("scripts/chat_post.php", {
 				chat_text: $("#chat_text").val()
 			},function() {
@@ -293,13 +296,38 @@ function processResponse(serverResponse)
 		}
 	}
 
-	if(window.location.pathname === "/home.php") {
+	var active = true;
+	var toggleButton = document.createElement("span");
+	toggleButton.setAttribute("id","toggle_button");
+	toggleButton.setAttribute("class", "toggle-button");
+	toggleButton.setAttribute("title","Turn OFF FWExtras");
+	toggleButton.innerHTML = "ON";
+	$(document.body).after(toggleButton);
+	$("#toggle_button").on("click",function(){
+		if(active) {
+			toggleButton.setAttribute("title","Turn ON FWExtras");
+			toggleButton.setAttribute("class","toggle-button off");
+			toggleButton.innerHTML = "OFF";
+			active = false;
+			setSendButtonType("submit");
+		}
+		else {
+			toggleButton.setAttribute("title","Turn OFF FWExtras");
+			toggleButton.setAttribute("class","toggle-button");
+			toggleButton.innerHTML = "ON";
+			active = true;
+			setSendButtonType("button");
+		}
+	});
+
+	if(window.location.pathname === "/home.php" && active) {
 
 		var refreshButton = document.createElement("span");
 		refreshButton.setAttribute("id","refresh_button");
 		refreshButton.setAttribute("class", "refresh-button");
-		refreshButton.setAttribute("href","");
+		refreshButton.setAttribute("title","Refresh the chat");
 		refreshButton.innerHTML = "@";
+
 		$("[name='chat_submit']").after(refreshButton);
 		$("#refresh_button").on("click",refreshChat);
 		console.log("Added refresh button.");
