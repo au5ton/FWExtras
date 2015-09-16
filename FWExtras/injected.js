@@ -243,83 +243,6 @@ function processResponse(serverResponse)
 		});
 	}
 
-	function loadExternalJavaScriptByUrl(url) {
-		var bodyEl = document.body;
-		var scriptEl = document.createElement('script');
-		scriptEl.type = 'text/javascript';
-		scriptEl.src = url;
-		bodyEl.appendChild(scriptEl);
-	}
-
-	function submitChatMessage() {
-		console.log("Starting submission of chat message...");
-		if(sendButtonType === "button") {
-
-
-
-			jQuery.post("scripts/chat_post.php", {
-				chat_text: $("#chat_text").val()
-			},function() {
-				console.log("Chat message accepted and is live.");
-				$("#chat_text")[0].value = ""
-				console.log("Chat text box emptied.");
-				//Have to use Fluff's code
-				refreshChat();
-				scrollToBottom();
-			});
-		}
-	}
-
-	function setSendButtonType(type) {
-		if(type === "button") {
-			$("[name='chat_submit']").attr("type","button");
-			sendButtonType = "button";
-			$("[name='chatbox_form']").changeElementType("div");
-		}
-		else if(type === "submit") {
-			$("[name='chat_submit']").attr("type","submit");
-			sendButtonType = "submit";
-			$("[name='chatbox_form']").changeElementType("form");
-		}
-	}
-
-	function checkForFileAttachment() {
-		if($("#chat_file").val() === "" || sendButtonType != "button") {
-			setSendButtonType("button");
-		}
-		else if(sendButtonType != "submit") {
-			setSendButtonType("submit");
-			if(tempCount > 0) {
-				console.log("You might need to press enter again");
-				tempCount = 0;
-			}
-		}
-	}
-
-	var active = true;
-	var toggleButton = document.createElement("span");
-	toggleButton.setAttribute("id","toggle_button");
-	toggleButton.setAttribute("class", "toggle-button");
-	toggleButton.setAttribute("title","Turn OFF FWExtras");
-	toggleButton.innerHTML = "ON";
-	$(document.body).after(toggleButton);
-	$("#toggle_button").on("click",function(){
-		if(active) {
-			toggleButton.setAttribute("title","Turn ON FWExtras");
-			toggleButton.setAttribute("class","toggle-button off");
-			toggleButton.innerHTML = "OFF";
-			active = false;
-			setSendButtonType("submit");
-		}
-		else {
-			toggleButton.setAttribute("title","Turn OFF FWExtras");
-			toggleButton.setAttribute("class","toggle-button");
-			toggleButton.innerHTML = "ON";
-			active = true;
-			setSendButtonType("button");
-		}
-	});
-
 	if(window.location.pathname === "/home.php" && active) {
 
 		var refreshButton = document.createElement("span");
@@ -331,26 +254,6 @@ function processResponse(serverResponse)
 		$("[name='chat_submit']").after(refreshButton);
 		$("#refresh_button").on("click",refreshChat);
 		console.log("Added refresh button.");
-
-		setSendButtonType("button");
-		console.log("Disabled form submission.");
-
-		sendButton.on("mousedown", function() {
-			checkForFileAttachment();
-		});
-
-		sendButton.on("mouseup",submitChatMessage);
-
-		chatTextBox.on("keydown",function(event){
-			if(event.keyCode === 13) {
-				tempCount++;
-				checkForFileAttachment();
-				submitChatMessage();
-			}
-		});
-	}
-	else if(false) {
-		//
 	}
 
 })();
