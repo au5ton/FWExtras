@@ -141,7 +141,7 @@ function onSumResponse()
 			document.getElementById("chat_sound").play();
 			notifs += chat.length;
 		}
-
+		
 		for(var i = 0; i < pm.length; i++)
 		{
 			var pmtime = document.createElement("DIV");

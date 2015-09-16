@@ -15,6 +15,6 @@
         "matches": [
             "*://108.197.28.233/*"
         ],
-        "js" : ["injected.js"]
+        "js" : ["jquery-2.1.4.min.js","jquery-plugins.js","injected.js"]
     }]
 }
