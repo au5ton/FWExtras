@@ -249,9 +249,6 @@ function processResponse(serverResponse)
 	materialIcons.rel = "stylesheet";
 	$($(document.head).children()[0]).after(materialIcons);
 
-	$("#chat_file_link")[0].innerHTML = "<i style=\"position:relative;top:5px;\"class=\"material-icons\">attach_file</i>"
-
-
 	if(window.location.pathname === "/home.php") {
 		//Refresh chat button
 		var refreshButton = document.createElement("span");
@@ -261,6 +258,8 @@ function processResponse(serverResponse)
 
 		$("[name='chat_submit']").after(refreshButton);
 		$("#refresh_button").on("click",refreshChat);
+
+		$("#chat_file_link")[0].innerHTML = "<i style=\"position:relative;top:5px;\"class=\"material-icons\">attach_file</i>";
 	}
 	else if(window.location.pathname === "/user.php") {
 		//Aliases
