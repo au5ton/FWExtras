@@ -20,3 +20,37 @@
 .toggle-button.off {
     background: red;
 }
+
+#alias_button {
+    background: #666;
+    color: #fff;
+    padding: 0!important;
+    margin: 0!important;
+    margin-left: 5px!important;
+    height: 0.8em;
+    width: 0.8em;
+    font-size: 0.8em;
+    line-height: 0.8em;
+    -webkit-transition: all;
+    -moz-transition: all;
+    transition: all;
+}
+#alias_button:hover {
+    background: #ddd;
+    color: #444;
+    padding: 3px;
+    -webkit-transition: all;
+    -moz-transition: all;
+    transition: all;
+    cursor: pointer;
+}
+
+#alias_label:before {
+    content: "“";
+}
+#alias_label:after {
+    content: "”";
+}
+#alias_label {
+    font-style: italic;
+}

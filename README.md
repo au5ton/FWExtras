@@ -3,4 +3,8 @@ A Chrome extension like Reddit Enhancement Suite that improves FW using only Jav
 
 
 ###Planned features
-The extension will let you send messages without reloading the page, tag private aliases to users, turn links in text into clickable links
+- [X] Refresh the chat without reloading the page
+- [ ] Send messages without reloading the page
+- [X] Tag private aliases to users ("who's this irl again?")
+- [ ] Turn text links into clickable links
+- [ ] Mentioning/replying to previous messages, and seeing what they were
