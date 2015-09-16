@@ -243,11 +243,19 @@ function processResponse(serverResponse)
 		});
 	}
 
+	//<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	var materialIcons = document.createElement("link");
+	materialIcons.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+	materialIcons.rel = "stylesheet";
+	$($(document.head).children()[0]).after(materialIcons);
+
+	$("#chat_file_link")[0].innerHTML = "<i style=\"position:relative;top:5px;\"class=\"material-icons\">attach_file</i>"
+
+
 	if(window.location.pathname === "/home.php") {
 		//Refresh chat button
 		var refreshButton = document.createElement("span");
 		refreshButton.setAttribute("id","refresh_button");
-		refreshButton.setAttribute("class", "refresh-button");
 		refreshButton.setAttribute("title","Refresh the chat");
 		refreshButton.innerHTML = "@";
 
