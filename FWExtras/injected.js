@@ -225,6 +225,7 @@ function processResponse(serverResponse)
 			document.title = "(" + notifs + ") " + titleText;
 		}
 	}
+	console.log("Response should be finished processing.");
 }
 
 (function main() {
@@ -260,10 +261,8 @@ function processResponse(serverResponse)
 				$("#chat_text")[0].value = ""
 				console.log("Chat text box emptied.");
 				//Have to use Fluff's code
-				setTimeout(function(){
-					setTitle();
-					scrollToBottom();
-				},250);
+				refreshChat();
+				scrollToBottom();
 			});
 		}
 	}
@@ -294,9 +293,16 @@ function processResponse(serverResponse)
 		}
 	}
 
-	setSendButtonType("button");
-
 	if(window.location.pathname === "/home.php") {
+
+		var refreshButton = document.createElement("span");
+		refreshButton.setAttribute("id","refresh_button");
+		refreshButton.setAttribute("class", "refresh-button");
+		refreshButton.setAttribute("href","");
+		refreshButton.innerHTML = "@";
+		$("[name='chat_submit']").after(refreshButton);
+		$("#refresh_button").on("click",refreshChat);
+		console.log("Added refresh button.");
 
 		setSendButtonType("button");
 		console.log("Disabled form submission.");
