@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+
+    "name": "FWExtras",
+    "version": "1.0",
+
+    "description": "A Chrome extension like Reddit Enhancement Suite that improves FW using only JavaScript injections",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+
+    "content_scripts" : [{
+        "matches": [
+            "*://108.197.28.233/*"
+        ],
+        "js" : ["injected.js"]
+    }]
+}

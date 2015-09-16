@@ -1,0 +1,14 @@
+#column_one	{
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+#column_left	{
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+#column_right	{
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
