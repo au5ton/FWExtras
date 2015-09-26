@@ -77,11 +77,4 @@ if(window.location.pathname === '/home.php') {
         }
     });
 
-    var refreshButton = document.createElement('span');
-    refreshButton.setAttribute('id','refresh_button');
-    refreshButton.setAttribute('title','Refresh the chat');
-    refreshButton.innerHTML = '@';
-    $('[name=\'chat_submit\']').after(refreshButton);
-    $('#refresh_button').on('click',refreshChat);
-
 }
