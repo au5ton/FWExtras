@@ -10,19 +10,19 @@ var $submit = $('[name=\'chat_submit\']');
 var $chat_text = $('#chat_text');
 var $file = $('[name=\'attachment\']');
 
+var refreshIntervalId = setInterval(function() {
+    refreshChat()
+},5000);
+
 function refreshChat() {
     var chatHistory = [];
     var sumResponse = [];
     console.log('Trying to refresh the chat.')
     jQuery.get('scripts/auto_refresh_home.php',function(response1){
         response1 = JSON.parse(response1);
-        //console.log(response1);
         sumResponse = response1;
         jQuery.getJSON('api/chat_messages.php',function(response2){
-            //console.log('Retreived entire chat log');
-            //console.log(response2);
             sumResponse[2] = response2;
-            //console.log(sumResponse);
             onSumResponse2(JSON.stringify(sumResponse));
         });
     });
@@ -65,7 +65,7 @@ function sendChatMessage() {
 if(window.location.pathname === '/home.php') {
     disableForm();
     $submit.on('click',function(event) {
-        //Recursion preventative from li
+        //Recursion preventative from manual $.trigger() above
         if(event.originalEvent) {
             sendChatMessage();
         }
@@ -77,35 +77,11 @@ if(window.location.pathname === '/home.php') {
         }
     });
 
-
-    //refreshChat();
     var refreshButton = document.createElement('span');
     refreshButton.setAttribute('id','refresh_button');
     refreshButton.setAttribute('title','Refresh the chat');
     refreshButton.innerHTML = '@';
-    var refreshButton2 = document.createElement('span');
-    refreshButton2.setAttribute('id','refresh_button2');
-    refreshButton2.setAttribute('title','Refresh the chat');
-    refreshButton2.innerHTML = '$';
-    var refreshButton3 = document.createElement('span');
-    refreshButton3.setAttribute('id','refresh_button3');
-    refreshButton3.setAttribute('title','Refresh the chat');
-    refreshButton3.innerHTML = '%';
-
-    $('[name=\'chat_submit\']').after(refreshButton3);
-    $('[name=\'chat_submit\']').after(refreshButton2);
     $('[name=\'chat_submit\']').after(refreshButton);
-
     $('#refresh_button').on('click',refreshChat);
-    $('#refresh_button2').on('click',function(){
-        jQuery.getJSON('api/chat_messages.php',function(res){
-            console.log(res);
-        });
-    });
-    $('#refresh_button3').on('click',function(){
-        jQuery.get('scripts/auto_refresh_home.php',function(res){
-            console.log(res);
-        });
-    });
 
 }
