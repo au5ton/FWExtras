@@ -1,11 +1,17 @@
 
 #refresh_button {
-    background: red;
+    /*background: red;*/
     color: white;
     width: 10px;
     height: 10px;
     margin-left: 2px;
     cursor: pointer;
+    position: relative;
+    top: 7px;
+}
+
+#chat_text {
+    width: 600px!important;
 }
 
 #alias_button {

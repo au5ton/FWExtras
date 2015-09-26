@@ -5,27 +5,6 @@
  *
  */
 
-
-
-var sendButton = $("[name='chat_submit']");
-var sendButtonType;
-var chatTextBox = $("#chat_text");
-var tempCount = 0;
-
-function refreshChat() {
-    console.log("Refreshing chat...");
-    jQuery.get("scripts/auto_refresh_home.php",function(res){
-        console.log("Chat diff retrieved.");
-        processResponse(res);
-    });
-}
-
-//<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-var materialIcons = document.createElement("link");
-materialIcons.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
-materialIcons.rel = "stylesheet";
-$($(document.head).children()[0]).after(materialIcons);
-
 if(window.location.pathname === "/home.php") {
     //
 }
