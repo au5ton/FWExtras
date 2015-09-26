@@ -2,7 +2,7 @@
 *  Aliases.js
 *
 *  Manages all things related to aliases on all pages
-*  Referred to as 'names' internally
+*  Referred to as 'names' internally because I type 'alias' wrong too many times
 *
 */
 
