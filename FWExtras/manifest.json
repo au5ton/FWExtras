@@ -2,13 +2,13 @@
     "manifest_version": 2,
 
     "name": "FWExtras",
-    "version": "1.0",
+    "version": "1.1",
 
     "description": "A Chrome extension like Reddit Enhancement Suite that improves FW using only JavaScript injections",
     "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
+        "16": "img/icon16.png",
+        "48": "img/icon48.png",
+        "128": "img/icon128.png"
     },
     "permissions": [
         "cookies",
@@ -20,15 +20,18 @@
             "*://108.197.28.233/*"
         ],
         "css": [
-            "fw-extra.css"
+            "css/fw-extra.css",
+            "css/vex-theme-default.css",
+            "css/vex.css"
         ],
         "js" : [
-            "jquery-2.1.4.min.js",
-            "jquery-plugins.js",
-            "cookies.js",
-            "chat.js",
-            "visual.js",
-            "aliases.js"
+            "lib/jquery-2.1.4.min.js",
+            "lib/jquery-plugins.js",
+            "lib/vex.combined.min.js",
+            "modules/chat.js",
+            "modules/visual.js",
+            "modules/aliases.js",
+            "modules/settings.js"
         ]
     }]
 }
