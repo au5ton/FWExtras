@@ -53,7 +53,7 @@ function onSumResponse2(serverResponse, forceapply)
                     content.setAttribute('onclick', 'expandMessage(this)');
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
-                    content.style.fontFamily = chat[i]['font'];
+                    content.style.fontFamily = getFont(chat[i]['font']); //We need CSS values
                     content.appendChild(document.createTextNode(chat[i]['content']));
                     var pic = document.createElement("DIV");
                     pic.setAttribute('class', 'prof_pic_sent');
@@ -114,7 +114,7 @@ function onSumResponse2(serverResponse, forceapply)
                     content.setAttribute('onclick', 'expandMessage(this)');
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
-                    content.style.fontFamily = chat[i]['font'];
+                    content.style.fontFamily = getFont(chat[i]['font']); //We need CSS values
                     content.appendChild(document.createTextNode(chat[i]['content']));
                     var spacer = document.createElement("DIV");
                     spacer.setAttribute('class', "spacer_rcvd");
