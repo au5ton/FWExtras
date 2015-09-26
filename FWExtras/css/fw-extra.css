@@ -1,4 +1,9 @@
 
+#refresh_button, #refresh_button2 {
+    margin: 5px;
+    cursor: pointer;
+}
+
 #name_button {
     background: #666;
     color: #fff;

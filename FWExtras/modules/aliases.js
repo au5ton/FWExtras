@@ -65,6 +65,14 @@ if(window.location.pathname === '/user.php') {
         nameLabel.innerHTML = '';
     }
 
+    jQuery.get('scripts/auto_refresh_home.php',function(res){
+        console.log(JSON.parse(res));
+        res = JSON.parse(res);
+        if(currentUser == res[1]) {
+            document.getElementById('profile_visits').innerHTML += ("; <br>Fluff World member ID: "+res[0]);
+        }
+    });
+
     $('#name_button').on('click', function(){
         if(hasAlias()) {
             console.log('User already has name, will replace with new name');

@@ -20,14 +20,12 @@
             "*://108.197.28.233/*"
         ],
         "css": [
-            "css/fw-extra.css",
-            "css/vex-theme-default.css",
-            "css/vex.css"
+            "css/fw-extra.css"
         ],
         "js" : [
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
-            "lib/vex.combined.min.js",
+            "modules/fluffcode.js",
             "modules/chat.js",
             "modules/visual.js",
             "modules/aliases.js",
