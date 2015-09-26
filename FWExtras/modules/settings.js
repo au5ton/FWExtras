@@ -6,19 +6,22 @@
 *
 */
 
-if(window.location.pathname === '/user.php') {
+var settings = document.createElement('a');
+settings.setAttribute('class','dropdown_btn');
+settings.removeAttribute('href');
+settings.setAttribute('onmouseover','hoverNav(this);showNav(\'settings\')');
+settings.setAttribute('onmouseout','hoverOut(this)');
+settings.setAttribute('id','settings_button');
+settings.innerHTML = 'FWExtras settings';
 
-    var settingsButton = document.createElement('span');
-    settingsButton.setAttribute('id','settings_button');
-    settingsButton.setAttribute('title','Open the FWExtras settings pane.');
-    settingsButton.innerHTML = '<i class="material-icons">settings</i>';
+$('.dropdown_btn[href="user.php"]').after(settings);
 
-    $('#user_prof_team').after(settingsButton);
-
-}
+$('#settings_button').on('click', function(){
+    openFWExtrasSettingsPane();
+});
 
 function openFWExtrasSettingsPane() {
 
-
+    alert('You opened the settings pane!');
 
 }

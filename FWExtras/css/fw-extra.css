@@ -1,19 +1,4 @@
 
-#refresh_button {
-    /*background: red;*/
-    color: white;
-    width: 10px;
-    height: 10px;
-    margin-left: 2px;
-    cursor: pointer;
-    position: relative;
-    top: 7px;
-}
-
-#chat_text {
-    width: 600px!important;
-}
-
 #name_button {
     background: #666;
     color: #fff;
@@ -46,4 +31,14 @@
 }
 #name_label {
     font-style: italic;
+}
+
+#settings_button {
+    color: rgb(0, 255, 0);
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+#settings_button:hover {
+    color: #fff!important;
+    background-color: #00aed4!important;
 }

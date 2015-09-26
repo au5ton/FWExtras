@@ -6,61 +6,45 @@
 *
 */
 
-/*
+if(window.location.pathname === '/user.php') {
 
-chrome.storage.sync.set({'names': names}, function() {
-// Notify that we saved.
-message('Settings saved');
-});
+    var names = {
+        data: {}
+    };
 
-chrome.storage.sync.get('names', function(items) {
-    //
-});
-
-*/
-
-var names = {
-    data: {}
-};
-
-function hasAlias(username) {
-    if(username) {
-        if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
-            return true;
+    function hasAlias(username) {
+        if(username) {
+            if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
-    else {
-        if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
-            return true;
+        else {
+            if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
-}
-
-chrome.storage.local.get('names', function(items) {
-    if(jQuery.isEmptyObject(items)) {
-        //No previous record of names, likely a first run
-        console.log('Empty object loaded, likely a first run');
-        chrome.storage.local.set({'names': names});
-    }
-    else {
-        names = items.names;
-        console.log('Names loaded');
     }
 
-    if(hasAlias()) {
-        nameLabel.innerHTML = names.data[currentUser];
-    }
-    else {
-        nameLabel.innerHTML = '';
-    }
-});
+    chrome.storage.local.get('names', function(items) {
+        if(jQuery.isEmptyObject(items)) {
+            //No previous record of names, likely a first run
+            console.log('Empty object loaded, likely a first run');
+            chrome.storage.local.set({'names': names});
+        }
+        else {
+            names = items.names;
+            console.log('Names loaded');
+        }
 
-if(window.location.pathname === '/home.php') {
-    //
-}
-else if(window.location.pathname === '/user.php') {
+        if(hasAlias()) {
+            nameLabel.innerHTML = names.data[currentUser];
+        }
+        else {
+            nameLabel.innerHTML = '';
+        }
+    });
 
     var currentUser = $('#js_username').html();
     var nameButton = document.createElement('span');
