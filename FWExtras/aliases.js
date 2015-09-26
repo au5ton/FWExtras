@@ -1,46 +1,114 @@
 /*
- *  Aliases.js
- *
- *  Manages all things related to aliases on all pages
- *
- */
+*  Aliases.js
+*
+*  Manages all things related to aliases on all pages
+*  Referred to as 'names' internally
+*
+*/
 
-if(window.location.pathname === "/home.php") {
+/*
+
+chrome.storage.sync.set({'names': names}, function() {
+// Notify that we saved.
+message('Settings saved');
+});
+
+chrome.storage.sync.get('names', function(items) {
+    //
+});
+
+*/
+
+var names = {
+    data: {}
+};
+
+function hasAlias(username) {
+    if(username) {
+        if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
+            return true;
+        }
+        return false;
+    }
+    else {
+        if(names.data[currentUser] !== undefined && names.data[currentUser] !== null) {
+            return true;
+        }
+        return false;
+    }
+}
+
+chrome.storage.local.get('names', function(items) {
+    if(jQuery.isEmptyObject(items)) {
+        //No previous record of names, likely a first run
+        console.log('Empty object loaded, likely a first run');
+        chrome.storage.local.set({'names': names});
+    }
+    else {
+        names = items.names;
+        console.log('Names loaded');
+    }
+
+    if(hasAlias()) {
+        nameLabel.innerHTML = names.data[currentUser];
+    }
+    else {
+        nameLabel.innerHTML = '';
+    }
+});
+
+if(window.location.pathname === '/home.php') {
     //
 }
-else if(window.location.pathname === "/user.php") {
-    //Aliases
-    var currentUser = $("#js_username").html();
-    var aliasButton = document.createElement("span");
-    aliasButton.setAttribute("id","alias_button");
-    aliasButton.setAttribute("title","Edit this user's alias");
-    aliasButton.innerHTML = "+";
-    $("#js_username").after(aliasButton);
+else if(window.location.pathname === '/user.php') {
 
-    var aliasLabel = document.createElement("div");
-    aliasLabel.setAttribute("id","alias_label");
-    aliasLabel.setAttribute("title","This is this user's alias. Click to refresh.");
-    if(Cookies.get("alias_"+currentUser) !== undefined && Cookies.get("alias_"+currentUser) !== null) {
-        aliasLabel.innerHTML = Cookies.get("alias_"+currentUser);
+    var currentUser = $('#js_username').html();
+    var nameButton = document.createElement('span');
+    nameButton.setAttribute('id','name_button');
+    nameButton.setAttribute('title','Edit this user\'s alias');
+    nameButton.innerHTML = '+';
+    var nameLabel = document.createElement('div');
+    nameLabel.setAttribute('id','name_label');
+    nameLabel.setAttribute('title','This is this user\'s alias. Click to refresh.');
+
+    $('#js_username').after(nameButton);
+    $('#name_button').after(nameLabel);
+
+    if(hasAlias()) {
+        nameLabel.innerHTML = names.data[currentUser];
     }
-    $("#alias_button").after(aliasLabel);
+    else {
+        nameLabel.innerHTML = '';
+    }
 
-    $("#alias_button").on("click", function(){
-        if(Cookies.get("alias_"+currentUser) !== undefined) {
-            alert("This user already has an alias. This will overwrite their current alias. Press cancel to cancel. Leave empty for no alias.");
+    $('#name_button').on('click', function(){
+        if(hasAlias()) {
+            console.log('User already has name, will replace with new name');
+            alert('This user already has an alias. This will overwrite their current alias. Press cancel to cancel. Leave empty for no alias.');
         }
-        var input = prompt("Enter an alias for "+currentUser+":","");
-        console.log(input);
-        Cookies.set("alias_"+currentUser,input);
-        $("#alias_label").trigger("click");
+        var input = prompt('Enter an alias for '+currentUser+':','');
+        if(input === null) {
+            //Cancel button pressed
+            console.log('Name replace cancelled');
+        }
+        else if(input !== undefined && input !== null) {
+            //Legit input was typed and pressed OK
+            names.data[currentUser] = input;
+            $('#name_label').trigger('click');
+            chrome.storage.local.set({'names': names}, function() {
+                console.log('Names updated:');
+                console.log(names);
+
+            });
+        }
     });
 
-    $("#alias_label").on("click", function(){
-        if(Cookies.get("alias_"+currentUser) !== undefined && Cookies.get("alias_"+currentUser) !== null) {
-            aliasLabel.innerHTML = Cookies.get("alias_"+currentUser);
+    $('#name_label').on('click', function(){
+        if(hasAlias()) {
+            nameLabel.innerHTML = names.data[currentUser];
         }
         else {
-            aliasLabel.innerHTML = "";
+            nameLabel.innerHTML = '';
         }
     });
 

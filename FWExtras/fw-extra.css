@@ -14,7 +14,7 @@
     width: 600px!important;
 }
 
-#alias_button {
+#name_button {
     background: #666;
     color: #fff;
     padding: 0!important;
@@ -28,7 +28,7 @@
     -moz-transition: all;
     transition: all;
 }
-#alias_button:hover {
+#name_button:hover {
     background: #ddd;
     color: #444;
     padding: 3px;
@@ -38,12 +38,12 @@
     cursor: pointer;
 }
 
-#alias_label:before {
+#name_label:before {
     content: "“";
 }
-#alias_label:after {
+#name_label:after {
     content: "”";
 }
-#alias_label {
+#name_label {
     font-style: italic;
 }
