@@ -14,7 +14,7 @@ settings.setAttribute('onmouseout','hoverOut(this)');
 settings.setAttribute('id','settings_button');
 settings.innerHTML = 'FWExtras settings';
 
-$('.dropdown_btn[href="user.php"]').after(settings);
+$('#settings_dropdown').append(settings);
 
 $('#settings_button').on('click', function(){
     openFWExtrasSettingsPane();
@@ -22,6 +22,6 @@ $('#settings_button').on('click', function(){
 
 function openFWExtrasSettingsPane() {
 
-    alert('You opened the settings pane!');
+    alert('Future FWExtras settings will be here.')
 
 }
