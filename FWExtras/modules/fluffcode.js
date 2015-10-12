@@ -9,8 +9,8 @@ xhReq=new XMLHttpRequest();
 var titleText = "";
 var notifs = 0;
 var lastnotif = 0;
-var lastcbpid = parseInt($("#chatbox").children()[$("#chatbox").children().length-1].children[2].getAttribute('data-msgid'));
-console.log("Most recent chat message has id of: ",lastcbpid);
+var lastcbpid;
+
 function onSumResponse2(serverResponse, forceapply)
 {
     //if (xhReq.readyState != 4)  { return; }

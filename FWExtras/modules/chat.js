@@ -10,9 +10,24 @@ var $submit = $('[name=\'chat_submit\']');
 var $chat_text = $('#chat_text');
 var $file = $('[name=\'attachment\']');
 
+//Clears all other timeouts, including chat refresh and auto-logout
+var highestTimeoutId = setInterval(";",5000);
+for (var i = 0 ; i <= highestTimeoutId ; i++) {
+    clearInterval(i);
+}
+
+var highestTimeoutId = setTimeout(";",5000);
+for (var i = 0 ; i <= highestTimeoutId ; i++) {
+    clearTimeout(i);
+}
+
+//Creates a new
 var refreshIntervalId = setInterval(function() {
-    refreshChat()
+    lastcbpid = parseInt($('#chatbox > .msg_container > [data-msgid]')[$('#chatbox > .msg_container > [data-msgid]').length-1].getAttribute('data-msgid'));
+    console.log('Most recent chat message has id of: ',lastcbpid);
+    refreshChat();
 },5000);
+console.log('Refreshing chat with new code at id: ',refreshIntervalId);
 
 function refreshChat() {
     var chatHistory = [];
