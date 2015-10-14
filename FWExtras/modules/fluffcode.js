@@ -11,7 +11,7 @@ var notifs = 0;
 var lastnotif = 0;
 var lastcbpid;
 
-function onSumResponse2(serverResponse, forceapply)
+function onSumResponse(serverResponse, forceapply)
 {
     //if (xhReq.readyState != 4)  { return; }
     //var serverResponse = xhReq.responseText;
@@ -151,6 +151,101 @@ function onSumResponse2(serverResponse, forceapply)
                 document.getElementById("chatbox").appendChild(newmsg);
             }
         }
+        if(notifs > lastnotif)
+		{
+			lastnotif = notifs;
+			//var chatDiv = document.getElementById("chatbox");
+			//chatDiv.scrollTop = chatDiv.scrollHeight;
+			document.getElementById("chatbox").style.backgroundColor = "#FFFFFF";
+			setTimeout(function(){document.getElementById("chatbox").style.backgroundColor = "#1C1C1C";}, 250);
+			setTimeout(function(){document.getElementById("chatbox").style.backgroundColor = "#FFFFFF";}, 500);
+			setTimeout(function(){document.getElementById("chatbox").style.backgroundColor = "#1C1C1C";}, 750);
+			document.getElementById("chat_sound").play();
+			var c2sc = new XMLHttpRequest();
+			c2sc.open("POST", "scripts/c2s_confirm.php", true)
+			c2sc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			//c2sc.setRequestHeader("Content-length", chatid.length);
+			//c2sc.setRequestHeader("Connection", "close");
+			c2sc.send("cbpid=" + chatid);
+		}
+		for(var i = 0; i < pm.length; i++)
+		{
+			var pmtime = document.createElement("DIV");
+			pmtime.setAttribute('class', "pm_time");
+			var namelink = document.createElement("A");
+			namelink.setAttribute('class', "pm_user");
+			namelink.setAttribute('href', "#");
+			namelink.setAttribute('onclick', "setRecepient(this.innerHTML);return false;");
+			var msg = document.createElement("DIV");
+			msg.setAttribute('class', "pm_msg");
+			if(pm[i]['send_to'] == 'all')
+			{
+				namelink.style.color = "#FFFFFF";
+				namelink.style.fontFamily = "Arial";
+				namelink.appendChild(document.createTextNode(":All"));
+			}
+			else if(username.toLowerCase() == pm[i]['from_user'].toLowerCase())
+			{
+				namelink.style.color = "#" + pm[i]['to_color'];
+				namelink.style.backgroundColor = "#" + pm[i]['to_secondary'];
+				namelink.style.fontFamily = pm[i]['to_font'];
+				namelink.appendChild(document.createTextNode(pm[i]['send_to']));
+			}
+			else
+			{
+				namelink.style.color = "#" + pm[i]['color'];
+				namelink.style.backgroundColor = "#" + pm[i]['secondary_color'];
+				namelink.style.fontFamily = pm[i]['font'];
+				namelink.appendChild(document.createTextNode(pm[i]['from_user']));
+			}
+			pmtime.appendChild(namelink);
+			pmtime.appendChild(document.createTextNode(" - "));
+			pmtime.appendChild(document.createTextNode(pm[i]['date']));
+			msg.style.color = "#" + pm[i]['color'];
+			msg.style.backgroundColor = "#" + pm[i]['secondary_color'];
+			msg.style.fontFamily = pm[i]['font'];
+			//msg.appendChild(document.createTextNode(pm[i]['content']));
+			msg.innerHTML = pm[i]['content'];
+			if(pm[i]['attachmentid'] != '0')
+			{
+				var attdiv = document.createElement("DIV");
+				attdiv.setAttribute('class', "attachment_pm");
+				var a = document.createElement("A");
+				a.setAttribute('href', "getattachment.php?file=" + pm[i]['url_filename']);
+				a.setAttribute('target', "_blank");
+				a.style.color = "#" + pm[i]['color'];
+				a.appendChild(document.createTextNode(pm[i]['filename']));
+				attdiv.appendChild(a);
+				attdiv.appendChild(document.createTextNode(" ("));
+				var span = document.createElement("SPAN");
+				span.style.color = "#" + pm[i]['color'];
+				span.appendChild(document.createTextNode(pm[i]['size']));
+				attdiv.appendChild(span);
+				attdiv.appendChild(document.createTextNode(")"));
+				msg.appendChild(attdiv);
+			}
+			notifs++;
+			document.getElementById("pm").appendChild(pmtime);
+			document.getElementById("pm").appendChild(msg);
+		}
+		if(pm.length > 0)
+		{
+			lastnotif = notifs;
+			//var pmDiv = document.getElementById("pm");
+			//pmDiv.scrollTop = pmDiv.scrollHeight;
+			document.getElementById("pm_sound").play();
+			//notifs += chat.length;
+			var c2sp = new XMLHttpRequest();
+			c2sp.open("POST", "scripts/c2s_confirm.php", true)
+			c2sp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			//c2sp.setRequestHeader("Content-length", pmtime.length);
+			//c2sp.setRequestHeader("Connection", "close");
+			c2sp.send("pmtime=" + pmtime);
+		}
+		if(notifs > 0 && (pm.length > 0 || chat.length > 0))
+		{
+			document.title = "(" + notifs + ") " + titleText;
+		}
     }
 }
 function fetchXMLReq()
@@ -167,86 +262,80 @@ function setTitle()
     //setTimeout("Rez_inspired_logout()", 1800000);
 }
 
-function Rez_inspired_logout()
-{
-    window.location.href = "scripts/logout.php";
-    return;
-}
-
 function scrollToBottom()
 {
-	var objDiv = document.getElementById("chatbox");
-	objDiv.scrollTop = objDiv.scrollHeight;
-	var pmBox = document.getElementById("pm");
-	pmBox.scrollTop = pmBox.scrollHeight;
+    var objDiv = document.getElementById("chatbox");
+    objDiv.scrollTop = objDiv.scrollHeight;
+    var pmBox = document.getElementById("pm");
+    pmBox.scrollTop = pmBox.scrollHeight;
 }
 
 function getFont(font_val)
 {
-	var font = "Arial";
-	var name = "undefined";
-	switch(font_val)
-	{
-		case '1':
-			font = "Arial, Helvetica, sans-serif";
-			name = "Arial";
-			break;
-		case '2':
-			font = "'Palatino Linotype', 'Book Antiqua', Palatino, serif";
-			name = "Palatino Linotype";
-			break;
-		case '3':
-			font = "Tahoma, Geneva, sans-serif";
-			name = "Tahoma";
-			break;
-		case '4':
-			font = "Georgia, serif";
-			name = "Georgia";
-			break;
-		case '5':
-			font = "'Times New Roman', Times, serif";
-			name = "Times New Roman";
-			break;
-		case '6':
-			font = "'Comic Sans', 'Comic Sans MS', 'Chalkboard', 'ChalkboardSE-Regular', sans-serif";
-			name = "Comic Sans MS";
-			break;
-		case '7':
-			font = "Impact, Charcoal, sans-serif";
-			name = "Impact";
-			break;
-		case '8':
-			font = "'Lucida Sans Unicode', 'Lucida Grande', sans-serif";
-			name = "Lucida Sans";
-			break;
-		case '9':
-			font = "'Trebuchet MS', Helvetica, sans-serif";
-			name = "Trebuchet MS";
-			break;
-		case '10':
-			font = "Verdana, Geneva, sans-serif";
-			name = "Verdana";
-			break;
-		case '11':
-			font = "'Courier New', Courier, monospace";
-			name = "Courier New";
-			break;
-		case '12':
-			font = "'Lucida Console', Monaco, monospace";
-			name = "Lucida Console";
-			break;
-		case '13':
-			font = "Copperplate, 'Copperplate Gothic', sans-serif";
-			name = "Copperplate Gothic";
-			break;
-		case '14':
-			font = "'Gill Sans', 'Gill Sans MT', sans-serif";
-			name = "Gill Sans";
-			break;
-		case '15':
-			font = "script, cursive, sans-serif";
-			name = "Cursive";
-			break;
-	}
-	return font;
+    var font = "Arial";
+    var name = "undefined";
+    switch(font_val)
+    {
+        case '1':
+        font = "Arial, Helvetica, sans-serif";
+        name = "Arial";
+        break;
+        case '2':
+        font = "'Palatino Linotype', 'Book Antiqua', Palatino, serif";
+        name = "Palatino Linotype";
+        break;
+        case '3':
+        font = "Tahoma, Geneva, sans-serif";
+        name = "Tahoma";
+        break;
+        case '4':
+        font = "Georgia, serif";
+        name = "Georgia";
+        break;
+        case '5':
+        font = "'Times New Roman', Times, serif";
+        name = "Times New Roman";
+        break;
+        case '6':
+        font = "'Comic Sans', 'Comic Sans MS', 'Chalkboard', 'ChalkboardSE-Regular', sans-serif";
+        name = "Comic Sans MS";
+        break;
+        case '7':
+        font = "Impact, Charcoal, sans-serif";
+        name = "Impact";
+        break;
+        case '8':
+        font = "'Lucida Sans Unicode', 'Lucida Grande', sans-serif";
+        name = "Lucida Sans";
+        break;
+        case '9':
+        font = "'Trebuchet MS', Helvetica, sans-serif";
+        name = "Trebuchet MS";
+        break;
+        case '10':
+        font = "Verdana, Geneva, sans-serif";
+        name = "Verdana";
+        break;
+        case '11':
+        font = "'Courier New', Courier, monospace";
+        name = "Courier New";
+        break;
+        case '12':
+        font = "'Lucida Console', Monaco, monospace";
+        name = "Lucida Console";
+        break;
+        case '13':
+        font = "Copperplate, 'Copperplate Gothic', sans-serif";
+        name = "Copperplate Gothic";
+        break;
+        case '14':
+        font = "'Gill Sans', 'Gill Sans MT', sans-serif";
+        name = "Gill Sans";
+        break;
+        case '15':
+        font = "script, cursive, sans-serif";
+        name = "Cursive";
+        break;
+    }
+    return font;
 }

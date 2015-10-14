@@ -14,14 +14,16 @@ settings.setAttribute('onmouseout','hoverOut(this)');
 settings.setAttribute('id','settings_button');
 settings.innerHTML = 'FWExtras settings';
 
-$('#settings_dropdown').append(settings);
-
-$('#settings_button').on('click', function(){
-    openFWExtrasSettingsPane();
-});
-
 function openFWExtrasSettingsPane() {
 
     alert('Future FWExtras settings will be here.')
 
 }
+
+$(document).ready(function(){
+    $('#settings_dropdown').append(settings);
+
+    $('#settings_button').on('click', function(){
+        openFWExtrasSettingsPane();
+    });
+});

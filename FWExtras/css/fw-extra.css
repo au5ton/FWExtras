@@ -47,3 +47,15 @@
     color: #fff!important;
     background-color: #00aed4!important;
 }
+
+
+#chat_file_link {
+    position: relative;
+    top: 7px;
+}
+
+#chat_text {
+    position: relative;
+    top: 10px;
+    width: 570px;
+}

@@ -4,15 +4,22 @@
     "name": "FWExtras",
     "version": "1.1",
 
-    "description": "A Chrome extension like Reddit Enhancement Suite that improves FW using only JavaScript injections",
+    "description": "Enhances your Fluff World experience.",
     "icons": {
         "16": "img/icon16.png",
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
+    "background": {
+        "persistent": true,
+        "scripts": ["modules/interceptor.js"]
+    },
     "permissions": [
         "cookies",
-        "storage"
+        "storage",
+        "*://108.197.28.233/*",
+        "webRequest",
+        "webRequestBlocking"
     ],
 
     "content_scripts" : [{
@@ -20,16 +27,19 @@
             "*://108.197.28.233/*"
         ],
         "css": [
+            "css/materialize.css",
+            "css/materialize-fixes.css",
             "css/fw-extra.css"
         ],
         "js" : [
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
+            "lib/materialize.js",
             "modules/fluffcode.js",
             "modules/chat.js",
             "modules/visual.js",
-            "modules/aliases.js",
+            "modules/nicknames.js",
             "modules/settings.js"
         ]
-    }]
-}
+        }]
+    }
