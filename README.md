@@ -1,10 +1,13 @@
 # fw-extras
-A Chrome extension like Reddit Enhancement Suite that improves FW using only JavaScript injections
+A Chrome extension like Reddit Enhancement Suite that enhances your FW experience.
 
 
 ###Planned features
 - [X] Refresh the chat without reloading the page
-- [ ] Send messages without reloading the page (sorta not possible yet)
-- [X] Tag private aliases to users ("who's this irl again?")
-- [ ] Turn text links into clickable links
-- [ ] Mentioning/replying to previous messages, and seeing what they were
+- [ ] Mute certain users from the chat
+- [X] Send chat messages without reloading the page
+- [ ] Send private messages without reloading the page
+- [X] Tag private nicknames to users ("who's this irl again?")
+- [ ] ~~Turn text links into clickable links~~ Already implemented server-side
+- [ ] Mentioning users
+- [ ] Referencing previous messages
