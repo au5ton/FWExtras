@@ -11,3 +11,4 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [ ] ~~Turn text links into clickable links~~ Already implemented server-side
 - [ ] Mentioning users
 - [ ] Referencing previous messages
+- [ ] Saving site image assets offline for quicker site load speeds
