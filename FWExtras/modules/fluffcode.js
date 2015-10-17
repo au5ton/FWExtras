@@ -40,7 +40,7 @@ function onSumResponse(serverResponse, forceapply)
                 newmsg.setAttribute('class', "msg_container");
                 var timediv = document.createElement("DIV");
                 timediv.setAttribute('class', "time");
-                timediv.appendChild(document.createTextNode(dateStringToHumanizedString(chat[i]['date']))); //Humanized date/times
+                timediv.appendChild(document.createTextNode(chat[i]['date'])); //Humanized date/times
                 var clearfloat = document.createElement("DIV");
                 clearfloat.setAttribute('class', "clearfloat");
                 if(user_id == chat[i]['user_id'])
@@ -53,8 +53,9 @@ function onSumResponse(serverResponse, forceapply)
                     content.setAttribute('onclick', 'expandMessage(this)');
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
-                    content.style.fontFamily = getFont(chat[i]['font']); //We need CSS values
-                    content.appendChild(document.createTextNode(chat[i]['content']));
+                    content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
+                    //content.appendChild(document.createTextNode(chat[i]['content']));
+                    content.innerHTML = chat[i]['content'];
                     var pic = document.createElement("DIV");
                     pic.setAttribute('class', 'prof_pic_sent');
                     pic.backgroundColor = "#" + chat[i]['secondary_color'];
@@ -114,7 +115,7 @@ function onSumResponse(serverResponse, forceapply)
                     content.setAttribute('onclick', 'expandMessage(this)');
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
-                    content.style.fontFamily = getFont(chat[i]['font']); //We need CSS values
+                    content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
                     content.appendChild(document.createTextNode(chat[i]['content']));
                     var spacer = document.createElement("DIV");
                     spacer.setAttribute('class', "spacer_rcvd");

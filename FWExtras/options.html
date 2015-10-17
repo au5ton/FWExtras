@@ -1,45 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Test Extension Options</title>
+    <title>FWExtras Options</title>
     <style>
+
+    body {
+        text-align: center;
+        background: #ecf0f1;
+    }
+
+    .container {
+        display: inline-block;
+        text-align: left;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        transition: box-shadow .25s;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        padding: 20px;
+        margin-top: 20px;
+    }
+
     label {
         display: block;
+    }
+    h3 {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    .module-desc {
+        margin-top: 5px;
+        margin-left: 20px;
+        max-width: 400px;
+    }
+    .module-option {
+        margin-left: 20px;
+    }
+    .subtitle {
+        margin-top: 0;
+        font-style: italic;
     }
     </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 
-    Favorite color:
-    <select id="color">
-        <option value="red">red</option>
-        <option value="green">green</option>
-        <option value="blue">blue</option>
-        <option value="yellow">yellow</option>
-    </select>
+    <div class="container">
+        <h1>FWExtras Options</h1>
+        <p class="subtitle">
+            Don't forget to press the Save button when you're done.
+        </p>
+        <label>
+            <input type="checkbox" id="like">
+            <h3>Chat without refresh</h3>
+            <p class="module-desc">
+                This uses Ajax HTTP requests to enable you to send chat messages and receive them without reloading your browser. If this get's too buggy for your liking, please inform the developer and disable this option if you'd like.
+            </p>
+        </label>
+        <label>
+            <input type="checkbox" id="like">
+            <h3>Nicknames</h3>
+            <p class="module-desc">
+                This lets you mark and save 'nicknames' for users on their user page, in case you forget who they are IRL. Doesn't work on custom user pages.
+            </p>
+        </label>
+        <label>
+            <input type="checkbox" id="like">
+            <h3>Locally hosted assets</h3>
+            <p class="module-desc">
+                This enables you to use the images of loteria and blackjack on your own computer to make page loading faster. Never miss a loteria card again.
+            </p>
+        </label>
+        <label>
+            <h3>Mentions</h3>
+            <p class="module-desc">
+                Someone trying to get your attention? This option will enable a mentions pane on the homepage that let's you see who's mentioned you in the chat, as well as a highlighting chat messages with your username in them.
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="like"> Mentions pane
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="like"> Highlight username mentions
+            </p>
+        </label>
+        <label>
+            <h3>Games Helper</h3>
+            <p class="module-desc">
+                Shows you the percentage chance that you'll bust in a blackjack game, highlights loteria cards that you can mark, and tells you when you can press the &iexcl;Buenas! button.
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="like"> Blackjack bust chance
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="like"> Loteria suggestions
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="like"> Loteria auto-play bot
+            </p>
+        </label>
+        <label>
+            <input type="checkbox" id="like">
+            <h3>Improved visuals</h3>
+            <p class="module-desc">
+                This currently doesn't do anything, but is expected to maybe someday idk. Toggling this doesn't actually save anywhere/
+            </p>
+        </label>
 
-    <h3>Active modules:</h3>
-    <label>
-        <input type="checkbox" id="like">
-        I like colors.
-    </label>
-    <label>
-        <input type="checkbox" id="like">
-        I like colors.
-    </label>
-    <label>
-        <input type="checkbox" id="like">
-        I like colors.
-    </label>
-    <label>
-        <input type="checkbox" id="like">
-        I like colors.
-    </label>
-
-    <div id="status"></div>
-    <button id="save">Save</button>
-
-    <script src="modules/settings.js"></script>
+        <div id="status"></div>
+        <button id="save">Save</button>
+    </div>
+    <script src="modules/options.js"></script>
 </body>
 </html>

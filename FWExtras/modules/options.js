@@ -22,7 +22,7 @@ $(document).ready(function(){
     $('#settings_dropdown').append(settings);
 
     $('#settings_button').on('click', function(){
-        chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
+        chrome.runtime.openOptionsPage();
     });
 });
 
@@ -34,10 +34,8 @@ if(window.location.pathname === '/options.html') {
 
     // Saves options to chrome.storage
     function save_options() {
-        var color = document.getElementById('color').value;
         var likesColor = document.getElementById('like').checked;
-        chrome.storage.sync.set({
-            favoriteColor: color,
+        chrome.storage.local.set({
             likesColor: likesColor
         }, function() {
             // Update status to let user know options were saved.
@@ -53,16 +51,13 @@ if(window.location.pathname === '/options.html') {
     // stored in chrome.storage.
     function restore_options() {
         // Use default value color = 'red' and likesColor = true.
-        chrome.storage.sync.get({
-            favoriteColor: 'red',
+        chrome.storage.local.get({
             likesColor: true
         }, function(items) {
-            document.getElementById('color').value = items.favoriteColor;
             document.getElementById('like').checked = items.likesColor;
         });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
-    document.getElementById('save').addEventListener('click',
-    save_options);
+    document.getElementById('save').addEventListener('click',save_options);
 
 }
