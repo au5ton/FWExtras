@@ -28,11 +28,11 @@ $(document).ready(function(){
             }
         }
 
-        chrome.storage.sync.get('names', function(items) {
+        chrome.storage.local.get('names', function(items) {
             if(jQuery.isEmptyObject(items)) {
                 //No previous record of names, likely a first run
                 console.log('Empty object loaded, likely a first run');
-                chrome.storage.sync.set({'names': names});
+                chrome.storage.local.set({'names': names});
             }
             else {
                 names = items.names;
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 //Legit input was typed and pressed OK
                 names.data[currentUser] = input;
                 $('#name_label').trigger('click');
-                chrome.storage.sync.set({'names': names}, function() {
+                chrome.storage.local.set({'names': names}, function() {
                     console.log('Names updated:');
                     console.log(names);
 
