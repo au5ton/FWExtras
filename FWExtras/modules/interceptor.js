@@ -27,18 +27,21 @@ chrome.webRequest.onBeforeRequest.addListener(
             if(requestedAsset.indexOf('/loteria/') !== -1) {
                 //likely a loteria image
                 //console.log('/loteria/ file?');
+                console.log('Intercepted '+requestedAsset+' to '+chrome.extension.getURL('../assets'+requestedAsset.substring('/img'.length)));
                 return {redirectUrl: chrome.extension.getURL('../assets'+requestedAsset.substring('/img'.length))}
             }
             if(requestedAsset.indexOf('/cards/') !== -1) {
                 //likely a blackjack card
                 //console.log('/cards/ file?');
                 //console.log(chrome.extension.getURL('../assets'+requestedAsset.substring('/img'.length)))
+                console.log('Intercepted '+requestedAsset+' to '+chrome.extension.getURL('../assets'+requestedAsset.substring('/img'.length)));
                 return {redirectUrl: chrome.extension.getURL('../assets'+requestedAsset.substring('/img'.length))}
             }
-            if(requestedAsset.indexOf('/media/') !== -1) {
+            /*if(requestedAsset.indexOf('/media/') !== -1) {
                 //console.log('/media/ file?');
-                console.log(chrome.extension.getURL('../assets'+requestedAsset));
-            }
+                console.log('Intercepted '+requestedAsset+' to '+chrome.extension.getURL('../assets'+requestedAsset));
+                return {redirectUrl: chrome.extension.getURL('../assets'+requestedAsset)};
+            }*/
         }
         return {redirectUrl: details.url};
     },

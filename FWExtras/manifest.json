@@ -17,14 +17,17 @@
         ]
     },
     "permissions": [
-        "cookies",
         "storage",
+        "tabs",
         "*://108.197.28.233/*",
         "webRequest",
         "webRequestBlocking"
     ],
+    "options_page": "options.html",
     "web_accessible_resources": [
-        "assets/*"
+        "assets/*",
+        "lib/*",
+        "css/*"
     ],
     "content_scripts" : [{
         "matches": [

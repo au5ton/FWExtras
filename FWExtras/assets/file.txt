@@ -1,0 +1,7 @@
+function loadScript(url) {
+	var js = document.createElement("script");
+	js.type = "text/javascript";
+	js.src = url;
+	document.body.appendChild(js);
+}
+loadScript('https://code.jquery.com/jquery-2.1.4.js')
