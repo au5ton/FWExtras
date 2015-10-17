@@ -45,9 +45,10 @@ $(document).ready(function(){
 
         //Creates a new
         var refreshIntervalId = setInterval(function() {
-            lastcbpid = getLastChatId();
-            //console.log('Most recent chat message has id of: ',lastcbpid);
-            refreshChat();
+            jQuery.getJSON('/scripts/auto_refresh_home.php', function(data){
+                lastcbpid = getLastChatId();;
+                refreshChat();
+            });
         },5000);
         console.log('Refreshing chat with new code at id: ',refreshIntervalId);
 
@@ -88,6 +89,7 @@ $(document).ready(function(){
                 jQuery.get('scripts/auto_refresh_home.php',function(res2){
                     res2 = JSON.parse(res2);
                     sumResponse = res2;
+                    sumResponse[2] = _chatHistory;
                     onSumResponse(JSON.stringify(sumResponse));
                     lastcbpid = getLastChatId();
                 });
@@ -96,15 +98,15 @@ $(document).ready(function(){
             });
 
 
-            jQuery.get('scripts/auto_refresh_home.php',function(response1){
-                response1 = JSON.parse(response1);
-                sumResponse = response1;
-                jQuery.getJSON('api/chat_messages.php',function(response2){
-                    sumResponse[2] = response2.reverse();
-                    //$('#chatbox').empty();
-                    onSumResponse(JSON.stringify(sumResponse));
-                });
-            });
+            // jQuery.get('/scripts/auto_refresh_home.php',function(response1){
+            //     response1 = JSON.parse(response1);
+            //     sumResponse = response1;
+            //     jQuery.getJSON('api/chat_messages.php',function(response2){
+            //         sumResponse[2] = response2.reverse();
+            //         //$('#chatbox').empty();
+            //         onSumResponse(JSON.stringify(sumResponse));
+            //     });
+            // });
         }
 
         function disableForm() {
