@@ -11,7 +11,7 @@ $(document).ready(function(){
         titleText = document.title;
 
         $('#online_users_title').on('click',function(){
-            Materialize.toast('I am a toast!', 4000);
+            Materialize.toast('I am a toast!', 60000);
         })
 
         var $form = $('[name=\'chatbox_form\']');
@@ -20,7 +20,7 @@ $(document).ready(function(){
         var $file = $('[name=\'attachment\']');
 
         //Clears all other timeouts, including chat refresh and auto-logout
-        var highestTimeoutId = setInterval(";",5000);
+        /*var highestTimeoutId = setInterval(";",5000);
         for (var i = 0 ; i <= highestTimeoutId ; i++) {
             clearInterval(i);
         }
@@ -28,7 +28,7 @@ $(document).ready(function(){
         var highestTimeoutId = setTimeout(";",5000);
         for (var i = 0 ; i <= highestTimeoutId ; i++) {
             clearTimeout(i);
-        }
+        }*/
 
         //Creates a new
         var refreshIntervalId = setInterval(function() {
@@ -73,9 +73,10 @@ $(document).ready(function(){
                     "chat_text": $chat_text.val()
                 }, function(res){
                     console.log('Done POSTing chat!');
-                    $chat_text[0].value = '';
+                    Materialize.toast('Chat message posted.', 3000);
                     refreshChat();
                 });
+                $chat_text[0].value = '';
 
             }
             else {

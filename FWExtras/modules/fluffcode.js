@@ -40,7 +40,7 @@ function onSumResponse(serverResponse, forceapply)
                 newmsg.setAttribute('class', "msg_container");
                 var timediv = document.createElement("DIV");
                 timediv.setAttribute('class', "time");
-                timediv.appendChild(document.createTextNode(chat[i]['date']));
+                timediv.appendChild(document.createTextNode(dateStringToHumanizedString(chat[i]['date']))); //Humanized date/times
                 var clearfloat = document.createElement("DIV");
                 clearfloat.setAttribute('class', "clearfloat");
                 if(user_id == chat[i]['user_id'])
@@ -225,8 +225,16 @@ function onSumResponse(serverResponse, forceapply)
 				msg.appendChild(attdiv);
 			}
 			notifs++;
-			document.getElementById("pm").appendChild(pmtime);
-			document.getElementById("pm").appendChild(msg);
+            if(pm[i]['send_to'].toLowerCase() == ':all')
+			{
+				document.getElementById("pm_box_all").appendChild(pmtime);
+				document.getElementById("pm_box_all").appendChild(msg);
+			}
+			else
+			{
+				document.getElementById("pm_box_private").appendChild(pmtime);
+				document.getElementById("pm_box_private").appendChild(msg);
+			}
 		}
 		if(pm.length > 0)
 		{

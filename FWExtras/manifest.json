@@ -12,7 +12,9 @@
     },
     "background": {
         "persistent": true,
-        "scripts": ["modules/interceptor.js"]
+        "scripts": [
+            "modules/interceptor.js"
+        ]
     },
     "permissions": [
         "cookies",
@@ -27,14 +29,13 @@
             "*://108.197.28.233/*"
         ],
         "css": [
-            "css/materialize.css",
-            "css/materialize-fixes.css",
             "css/fw-extra.css"
         ],
         "js" : [
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
             "lib/materialize.js",
+            "modules/util.js",
             "modules/fluffcode.js",
             "modules/chat.js",
             "modules/visual.js",
