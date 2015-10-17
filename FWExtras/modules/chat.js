@@ -5,6 +5,8 @@
 *
 */
 
+var _chatHistory = [];
+
 $(document).ready(function(){
     if(window.location.pathname === '/home.php') {
 
@@ -19,20 +21,15 @@ $(document).ready(function(){
         var $chat_text = $('#chat_text');
         var $file = $('[name=\'attachment\']');
 
-        //Clears all other timeouts, including chat refresh and auto-logout
-        /*var highestTimeoutId = setInterval(";",5000);
-        for (var i = 0 ; i <= highestTimeoutId ; i++) {
-            clearInterval(i);
-        }
+        var postingChat = false;
 
-        var highestTimeoutId = setTimeout(";",5000);
-        for (var i = 0 ; i <= highestTimeoutId ; i++) {
-            clearTimeout(i);
-        }*/
+        function getLastChatId() {
+            return parseInt($('#chatbox > .msg_container > [data-msgid]')[$('#chatbox > .msg_container > [data-msgid]').length-1].getAttribute('data-msgid'))
+        }
 
         //Creates a new
         var refreshIntervalId = setInterval(function() {
-            lastcbpid = parseInt($('#chatbox > .msg_container > [data-msgid]')[$('#chatbox > .msg_container > [data-msgid]').length-1].getAttribute('data-msgid'));
+            lastcbpid = getLastChatId();
             console.log('Most recent chat message has id of: ',lastcbpid);
             refreshChat();
         },5000);
@@ -56,12 +53,14 @@ $(document).ready(function(){
             console.log('Disabled HTML chat form');
             $submit.attr('type','button');
             $form.changeElementType('div');
+            $form = $('[name=\'chatbox_form\']');
         }
 
         function enableForm() {
             console.log('Enabled HTML chat form');
             $submit.attr('type','submit');
             $form.changeElementType('form');
+            $form = $('[name=\'chatbox_form\']');
         }
 
         function sendChatMessage() {
