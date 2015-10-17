@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "FWExtras",
-    "version": "1.1",
+    "version": "1.2",
 
     "description": "Enhances your Fluff World experience.",
     "icons": {
@@ -23,7 +23,9 @@
         "webRequest",
         "webRequestBlocking"
     ],
-
+    "web_accessible_resources": [
+        "assets/*"
+    ],
     "content_scripts" : [{
         "matches": [
             "*://108.197.28.233/*"
@@ -34,6 +36,7 @@
         "js" : [
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
+            "lib/underscore-min.js",
             "lib/materialize.js",
             "modules/util.js",
             "modules/fluffcode.js",

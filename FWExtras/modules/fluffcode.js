@@ -151,6 +151,7 @@ function onSumResponse(serverResponse, forceapply)
                 document.getElementById("chatbox").appendChild(newmsg);
             }
         }
+        //console.log('notifs',notifs,'lastnotif',lastnotif);
         if(notifs > lastnotif)
 		{
 			lastnotif = notifs;

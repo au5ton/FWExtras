@@ -7,6 +7,22 @@
 
 var _chatHistory = [];
 
+jQuery.getJSON('api/chat_messages.php',function(res){
+    _chatHistory = res.reverse();
+});
+
+function sortChatHistoryById(a,b) {
+    //a is less than b by some ordering criterion
+    if (parseInt(a['id']) < parseInt(b['id'])) {
+        return -1;
+    }
+    //a is greater than b by the ordering criterion
+    if (parseInt(a['id']) > parseInt(b['id'])) {
+        return 1;
+    }
+    return 0;
+}
+
 $(document).ready(function(){
     if(window.location.pathname === '/home.php') {
 
@@ -30,7 +46,7 @@ $(document).ready(function(){
         //Creates a new
         var refreshIntervalId = setInterval(function() {
             lastcbpid = getLastChatId();
-            console.log('Most recent chat message has id of: ',lastcbpid);
+            //console.log('Most recent chat message has id of: ',lastcbpid);
             refreshChat();
         },5000);
         console.log('Refreshing chat with new code at id: ',refreshIntervalId);
@@ -39,11 +55,53 @@ $(document).ready(function(){
             var chatHistory = [];
             var sumResponse = [];
             console.log('Trying to refresh the chat.')
+
+
+
+            jQuery.getJSON('api/chat_messages.php',function(res){
+                chatHistory = res.reverse();
+
+                //Taking the previously stored _chatHistory and doing some processing to append only the new chat messages
+                //Underscore.js (_.uniq) is a big help here.
+                //Because you can't compare objects with ===, I compare the object's JSON string instead
+
+                var _chatHistoryStrings = [];
+                for(var i = 0; i < _chatHistory.length; i++) {
+                    _chatHistoryStrings.push(JSON.stringify(_chatHistory[i]));
+                }
+
+                var chatHistoryStrings = [];
+                for(var i = 0; i < chatHistory.length; i++) {
+                    chatHistoryStrings.push(JSON.stringify(chatHistory[i]));
+                }
+
+                var uniqueChatStrings = _.uniq(_chatHistoryStrings.concat(chatHistoryStrings));
+                //console.log('uniqueChatStrings.length',uniqueChatStrings.length);
+
+                var resultingChatHistory = [];
+                for(var i = 0; i < uniqueChatStrings.length; i++) {
+                    resultingChatHistory.push(JSON.parse(uniqueChatStrings[i]));
+                }
+
+                _chatHistory = resultingChatHistory;
+
+                jQuery.get('scripts/auto_refresh_home.php',function(res2){
+                    res2 = JSON.parse(res2);
+                    sumResponse = res2;
+                    onSumResponse(JSON.stringify(sumResponse));
+                    lastcbpid = getLastChatId();
+                });
+
+
+            });
+
+
             jQuery.get('scripts/auto_refresh_home.php',function(response1){
                 response1 = JSON.parse(response1);
                 sumResponse = response1;
                 jQuery.getJSON('api/chat_messages.php',function(response2){
-                    sumResponse[2] = response2;
+                    sumResponse[2] = response2.reverse();
+                    //$('#chatbox').empty();
                     onSumResponse(JSON.stringify(sumResponse));
                 });
             });
