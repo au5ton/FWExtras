@@ -55,7 +55,7 @@ function onSumResponse(serverResponse, forceapply)
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
                     content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
                     //content.appendChild(document.createTextNode(chat[i]['content']));
-                    content.innerHTML = chat[i]['content'];
+                    content.innerHTML = chat[i]['content']; //Fixes emotes and links
                     var pic = document.createElement("DIV");
                     pic.setAttribute('class', 'prof_pic_sent');
                     pic.backgroundColor = "#" + chat[i]['secondary_color'];
@@ -65,7 +65,8 @@ function onSumResponse(serverResponse, forceapply)
                     img.setAttribute('src', 'img/profile/' + chat[i]['pic']);
                     pic.appendChild(img);
                     var a_prof = document.createElement("A");
-                    a_prof.setAttribute('href', 'img/profile/' + chat[i]['username']);
+                    //a_prof.setAttribute('href', 'img/profile/' + chat[i]['username']);
+                    a_prof.setAttribute('href', 'user.php?name=' + chat[i]['username']);
                     a_prof.appendChild(pic);
                     if(chat[i]['attachmentid'] != '0')
                     {
@@ -116,7 +117,8 @@ function onSumResponse(serverResponse, forceapply)
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
                     content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
-                    content.appendChild(document.createTextNode(chat[i]['content']));
+                    //content.appendChild(document.createTextNode(chat[i]['content']));
+                    content.innerHTML = chat[i]['content']; //Fixes emotes and links
                     var spacer = document.createElement("DIV");
                     spacer.setAttribute('class', "spacer_rcvd");
                     if(chat[i]['attachmentid'] != '0')

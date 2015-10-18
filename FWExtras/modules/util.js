@@ -27,3 +27,13 @@ function dateStringToHumanizedString(str) {
     }
     return (date_object.getMonth()+1)+'/'+(date_object.getDate())+' '+normal_hour+':'+normal_minute+' '+AmPm;
 }
+var _escape = document.createElement('textarea');
+function escapeHTML(html) {
+    _escape.textContent = html;
+    return _escape.innerHTML;
+}
+
+function unescapeHTML(html) {
+    _escape.innerHTML = html;
+    return _escape.textContent;
+}

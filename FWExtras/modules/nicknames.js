@@ -7,7 +7,7 @@
 */
 
 $(document).ready(function(){
-    if(window.location.pathname === '/user.php') {
+    if(window.location.pathname === '/user.php' && _globalOptions.nicknames_base === true) {
 
         var names = {
             data: {}

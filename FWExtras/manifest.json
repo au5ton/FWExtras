@@ -18,7 +18,6 @@
     },
     "permissions": [
         "storage",
-        "tabs",
         "*://108.197.28.233/*",
         "webRequest",
         "webRequestBlocking"
@@ -27,7 +26,7 @@
     "web_accessible_resources": [
         "assets/*",
         "lib/*",
-        "css/*",        
+        "css/*",
         "options.html"
     ],
     "content_scripts" : [{
@@ -38,16 +37,17 @@
             "css/fw-extra.css"
         ],
         "js" : [
+
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
             "lib/underscore-min.js",
             "lib/materialize.js",
             "modules/util.js",
+            "modules/options.js",
             "modules/fluffcode.js",
             "modules/chat.js",
             "modules/visual.js",
-            "modules/nicknames.js",
-            "modules/options.js"
+            "modules/nicknames.js"
         ]
         }]
     }

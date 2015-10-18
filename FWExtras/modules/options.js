@@ -7,6 +7,7 @@
 */
 
 var _optionsChangedEvent = new Event('FWExtrasOptionsUpdated');
+var _optionsLoadedEvent = new Event('FWExtrasOptionsLoaded');
 
 var _globalOptions = {};
 
@@ -72,6 +73,7 @@ function restore_options(atOptionsPage) {
             document.getElementById('loteria_suggestions').checked = items.loteria_suggestions;
             document.getElementById('loteria_bot').checked = items.loteria_bot;
             Materialize.toast('Options restored.',4000);
+            document.dispatchEvent('FWExtrasOptionsLoaded');
         }
         _globalOptions = items;
         console.log(_globalOptions);

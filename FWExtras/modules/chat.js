@@ -27,7 +27,7 @@ function sortChatHistoryById(a,b) {
 }
 
 $(document).ready(function(){
-    if(window.location.pathname === '/home.php') {
+    if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
 
         titleText = document.title;
 
@@ -48,10 +48,15 @@ $(document).ready(function(){
 
         //Creates a new
         var refreshIntervalId = setInterval(function() {
-            jQuery.getJSON('/scripts/auto_refresh_home.php', function(data){
-                lastcbpid = getLastChatId();;
-                refreshChat();
-            });
+            try {
+                jQuery.getJSON('/scripts/auto_refresh_home.php', function(data){
+                    lastcbpid = getLastChatId();;
+                    refreshChat();
+                });
+            }
+            catch(err) {
+                console.log(err);
+            }
         },5000);
         console.log('Refreshing chat with new code at id: ',refreshIntervalId);
 
