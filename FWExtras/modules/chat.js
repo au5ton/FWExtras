@@ -5,6 +5,9 @@
 *
 */
 
+//TODO: update chat based on what messages are currently in the DOM, not what the newest one is
+//TODO: display indicator if a chat message is still in-progress of sending
+
 var _chatHistory = [];
 
 jQuery.getJSON('api/chat_messages.php',function(res){
@@ -155,7 +158,7 @@ $(document).ready(function(){
         });
         $chat_text.on('keyup', function(event){
             if(event.keyCode === 13) {
-                console.log(event.keyCode);
+                //console.log(event.keyCode);
                 sendChatMessage();
             }
         });

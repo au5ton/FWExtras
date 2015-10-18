@@ -27,7 +27,8 @@
     "web_accessible_resources": [
         "assets/*",
         "lib/*",
-        "css/*"
+        "css/*",        
+        "options.html"
     ],
     "content_scripts" : [{
         "matches": [
@@ -46,7 +47,7 @@
             "modules/chat.js",
             "modules/visual.js",
             "modules/nicknames.js",
-            "modules/settings.js"
+            "modules/options.js"
         ]
         }]
     }

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>FWExtras Options</title>
+    <link href="css/fw-extra.css" rel="stylesheet">
     <style>
 
     body {
@@ -41,8 +42,12 @@
         margin-top: 0;
         font-style: italic;
     }
+    .toast {
+        background-color: #0d900b;
+    }
     </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/materialize.js"></script>
 </head>
 <body>
 
@@ -52,21 +57,21 @@
             Don't forget to press the Save button when you're done.
         </p>
         <label>
-            <input type="checkbox" id="like">
+            <input type="checkbox" id="chat_base">
             <h3>Chat without refresh</h3>
             <p class="module-desc">
                 This uses Ajax HTTP requests to enable you to send chat messages and receive them without reloading your browser. If this get's too buggy for your liking, please inform the developer and disable this option if you'd like.
             </p>
         </label>
         <label>
-            <input type="checkbox" id="like">
+            <input type="checkbox" id="nicknames_base">
             <h3>Nicknames</h3>
             <p class="module-desc">
                 This lets you mark and save 'nicknames' for users on their user page, in case you forget who they are IRL. Doesn't work on custom user pages.
             </p>
         </label>
         <label>
-            <input type="checkbox" id="like">
+            <input type="checkbox" id="interceptor_localassets">
             <h3>Locally hosted assets</h3>
             <p class="module-desc">
                 This enables you to use the images of loteria and blackjack on your own computer to make page loading faster. Never miss a loteria card again.
@@ -78,10 +83,10 @@
                 Someone trying to get your attention? This option will enable a mentions pane on the homepage that let's you see who's mentioned you in the chat, as well as a highlighting chat messages with your username in them.
             </p>
             <p class="module-option">
-                <input type="checkbox" id="like"> Mentions pane
+                <input type="checkbox" id="mentions_pane"> Mentions pane
             </p>
             <p class="module-option">
-                <input type="checkbox" id="like"> Highlight username mentions
+                <input type="checkbox" id="mentions_highlighter"> Highlight username mentions
             </p>
         </label>
         <label>
@@ -90,24 +95,23 @@
                 Shows you the percentage chance that you'll bust in a blackjack game, highlights loteria cards that you can mark, and tells you when you can press the &iexcl;Buenas! button.
             </p>
             <p class="module-option">
-                <input type="checkbox" id="like"> Blackjack bust chance
+                <input type="checkbox" id="blackjack_base"> Blackjack bust chance
             </p>
             <p class="module-option">
-                <input type="checkbox" id="like"> Loteria suggestions
+                <input type="checkbox" id="loteria_suggestions"> Loteria suggestions
             </p>
             <p class="module-option">
-                <input type="checkbox" id="like"> Loteria auto-play bot
+                <input type="checkbox" id="loteria_bot"> Loteria auto-play bot
             </p>
         </label>
         <label>
-            <input type="checkbox" id="like">
+            <input type="checkbox" id="visuals_base">
             <h3>Improved visuals</h3>
             <p class="module-desc">
                 This currently doesn't do anything, but is expected to maybe someday idk. Toggling this doesn't actually save anywhere/
             </p>
         </label>
 
-        <div id="status"></div>
         <button id="save">Save</button>
     </div>
     <script src="modules/options.js"></script>
