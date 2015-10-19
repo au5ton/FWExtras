@@ -33,7 +33,6 @@ function save_options() {
     var mentions_highlighter = document.getElementById('mentions_highlighter').checked;
     var blackjack_base = document.getElementById('blackjack_base').checked;
     var loteria_suggestions = document.getElementById('loteria_suggestions').checked;
-    var loteria_bot = document.getElementById('loteria_bot').checked;
     chrome.storage.local.set({
         chat_base: chat_base,
         nicknames_base: nicknames_base,
@@ -41,8 +40,7 @@ function save_options() {
         mentions_pane: mentions_pane,
         mentions_highlighter: mentions_highlighter,
         blackjack_base: blackjack_base,
-        loteria_suggestions: loteria_suggestions,
-        loteria_bot: loteria_bot
+        loteria_suggestions: loteria_suggestions
     }, function() {
         // Update status to let user know options were saved.
         Materialize.toast('Options saved.',4000);
@@ -60,8 +58,7 @@ function restore_options(atOptionsPage) {
         mentions_pane: false,
         mentions_highlighter: false,
         blackjack_base: false,
-        loteria_suggestions: false,
-        loteria_bot: false
+        loteria_suggestions: false
     }, function(items) {
         if(atOptionsPage === true) {
             document.getElementById('chat_base').checked = items.chat_base;
@@ -71,7 +68,6 @@ function restore_options(atOptionsPage) {
             document.getElementById('mentions_highlighter').checked = items.mentions_highlighter;
             document.getElementById('blackjack_base').checked = items.blackjack_base;
             document.getElementById('loteria_suggestions').checked = items.loteria_suggestions;
-            document.getElementById('loteria_bot').checked = items.loteria_bot;
             Materialize.toast('Options restored.',4000);
             document.dispatchEvent('FWExtrasOptionsLoaded');
         }

@@ -14,8 +14,7 @@ chrome.storage.local.get({
     mentions_pane: false,
     mentions_highlighter: false,
     blackjack_base: false,
-    loteria_suggestions: false,
-    loteria_bot: false
+    loteria_suggestions: false
 }, function(items) {
     _globalOptions = items;
     console.log(_globalOptions);
