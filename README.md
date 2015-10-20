@@ -14,3 +14,5 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [ ] Blackjack helper
 - [ ] Loteria helper
 - [ ] Chat filtering (pseudo chat rooms, muting)
+
+some other change
