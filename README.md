@@ -8,7 +8,9 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [X] Send chat messages without reloading the page
 - [ ] Send private messages without reloading the page
 - [X] Tag private nicknames to users ("who's this irl again?")
-- [ ] ~~Turn text links into clickable links~~ Already implemented server-side
+- [X] ~~Turn text links into clickable links~~ Already implemented server-side
 - [ ] Mentioning users
 - [ ] Referencing previous messages
 - [X] Saving site image assets offline for quicker site load speeds
+- [ ] Blackjack helper
+- [ ] Loteria helper
