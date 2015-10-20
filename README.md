@@ -3,8 +3,7 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 
 
 ###Planned features
-- [X] Refresh the chat without reloading the page
-- [ ] Mute certain users from the chat
+- [X] Refresh the chat without reloading the page (automatic)
 - [X] Send chat messages without reloading the page
 - [ ] Send private messages without reloading the page
 - [X] Tag private nicknames to users ("who's this irl again?")
@@ -14,3 +13,4 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [X] Saving site image assets offline for quicker site load speeds
 - [ ] Blackjack helper
 - [ ] Loteria helper
+- [ ] Chat filtering (pseudo chat rooms, muting)
