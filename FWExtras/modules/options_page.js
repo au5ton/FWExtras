@@ -42,7 +42,11 @@ function save_options() {
     // Update status to let user know options were saved.
     if(needsReload === true) {
       Materialize.toast('<img class="emoji" src="img/warning.png"><h5>Your options have been saved, but a reload is required for them to take effect. Reloading in 2 seconds.</h5>',2000);
+      window.onbeforeunload = function () {
+        return "Please let the extension reload first.";
+      };
       setTimeout(function(){
+        window.onbeforeunload = undefined;
         chrome.runtime.reload();
       },2000);
       needsReload = false;
