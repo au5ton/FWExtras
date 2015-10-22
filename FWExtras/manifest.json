@@ -13,6 +13,7 @@
     "background": {
         "persistent": true,
         "scripts": [
+            "lib/jquery-2.1.4.min.js",
             "modules/interceptor.js"
         ]
     },
@@ -37,7 +38,6 @@
             "css/fw-extra.css"
         ],
         "js" : [
-
             "lib/jquery-2.1.4.min.js",
             "lib/jquery-plugins.js",
             "lib/underscore-min.js",

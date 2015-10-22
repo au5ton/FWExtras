@@ -5,14 +5,16 @@
 *
 */
 
-//TODO: update chat based on what messages are currently in the DOM, not what the newest one is
+//TODO: update chat based on what messages are currently in the DOM (check every element and keep track of it in an object!), not what the newest one is
 //TODO: display indicator if a chat message is still in-progress of sending
 
 var _chatHistory = [];
 
-jQuery.getJSON('api/chat_messages.php',function(res){
-    _chatHistory = res.reverse();
-});
+if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
+    jQuery.getJSON('api/chat_messages.php',function(res){
+        _chatHistory = res.reverse();
+    });
+}
 
 function sortChatHistoryById(a,b) {
     //a is less than b by some ordering criterion
@@ -28,6 +30,10 @@ function sortChatHistoryById(a,b) {
 
 $(document).ready(function(){
     if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
+
+        jQuery.getJSON('api/chat_messages.php',function(res){
+            _chatHistory = res.reverse();
+        });
 
         titleText = document.title;
 

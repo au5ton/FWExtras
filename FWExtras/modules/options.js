@@ -33,6 +33,15 @@ function save_options() {
     var mentions_highlighter = document.getElementById('mentions_highlighter').checked;
     var blackjack_base = document.getElementById('blackjack_base').checked;
     var loteria_suggestions = document.getElementById('loteria_suggestions').checked;
+    _globalOptions = {
+        chat_base: chat_base,
+        nicknames_base: nicknames_base,
+        interceptor_localassets: interceptor_localassets,
+        mentions_pane: mentions_pane,
+        mentions_highlighter: mentions_highlighter,
+        blackjack_base: blackjack_base,
+        loteria_suggestions: loteria_suggestions
+    };
     chrome.storage.local.set({
         chat_base: chat_base,
         nicknames_base: nicknames_base,
@@ -44,8 +53,19 @@ function save_options() {
     }, function() {
         // Update status to let user know options were saved.
         Materialize.toast('Options saved.',4000);
+        chrome.runtime.sendMessage({
+            greeting: 'GlobalOptionsUpdated',
+            globalOptions: _globalOptions
+        });
     });
 }
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if(request.greeting === 'GlobalOptionsLoaded' || request.greeting === 'GlobalOptionsUpdated') {
+        _globalOptions = request.globalOptions;
+        console.log('Global options loaded or updated (foreground):', _globalOptions);
+    }
+});
 
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
@@ -72,6 +92,10 @@ function restore_options(atOptionsPage) {
             document.dispatchEvent('FWExtrasOptionsLoaded');
         }
         _globalOptions = items;
+        chrome.runtime.sendMessage({
+            greeting: 'GlobalOptionsLoaded',
+            globalOptions: _globalOptions
+        });
         console.log(_globalOptions);
     });
 }
