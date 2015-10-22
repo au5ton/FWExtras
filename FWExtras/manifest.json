@@ -14,7 +14,7 @@
         "persistent": true,
         "scripts": [
             "lib/jquery-2.1.4.min.js",
-            "modules/options_general.js",
+            "modules/options.js",
             "modules/interceptor.js"
         ]
     },
@@ -43,9 +43,8 @@
             "lib/jquery-plugins.js",
             "lib/underscore-min.js",
             "lib/materialize.js",
+            "modules/options.js",
             "modules/util.js",
-            "modules/options_general.js",
-            "modules/options_foreground.js",
             "modules/fluffcode.js",
             "modules/chat.js",
             "modules/visual.js",

@@ -11,12 +11,6 @@
 var _chatHistory = [];
 var _loadedChatIds = [];
 
-if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
-    jQuery.getJSON('api/chat_messages.php',function(res){
-        _chatHistory = res.reverse();
-    });
-}
-
 function refreshLoadedChatIds() {
     _loadedChatIds = [];
     var chats = $('.msg_rcvd');
@@ -37,11 +31,9 @@ function sortChatHistoryById(a,b) {
     return 0;
 }
 
-$(document).ready(function(){
+Options.get(function(options){
 
-    refreshLoadedChatIds();
-
-    if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
+    if(window.location.pathname === '/home.php' && options.chat_base === true) {
 
         jQuery.getJSON('api/chat_messages.php',function(res){
             _chatHistory = res.reverse();
@@ -76,14 +68,12 @@ $(document).ready(function(){
                 console.log(err);
             }
         },5000);
-        console.log('Refreshing chat with new code at id: ',refreshIntervalId);
+        console.log('Refreshing chat with interval id: ', refreshIntervalId);
 
         function refreshChat() {
             var chatHistory = [];
             var sumResponse = [];
             console.log('Trying to refresh the chat.')
-
-
 
             jQuery.getJSON('api/chat_messages.php',function(res){
                 chatHistory = res.reverse();
@@ -122,7 +112,7 @@ $(document).ready(function(){
 
 
             });
-            
+
         }
 
         function disableForm() {
@@ -177,4 +167,6 @@ $(document).ready(function(){
         });
 
     }
+
+
 });
