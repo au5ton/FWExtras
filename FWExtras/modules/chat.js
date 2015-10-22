@@ -68,7 +68,7 @@ $(document).ready(function(){
         var refreshIntervalId = setInterval(function() {
             try {
                 jQuery.getJSON('/scripts/auto_refresh_home.php', function(data){
-                    lastcbpid = getLastChatId();;
+                    lastcbpid = getLastChatId();
                     refreshChat();
                 });
             }
@@ -122,17 +122,7 @@ $(document).ready(function(){
 
 
             });
-
-
-            // jQuery.get('/scripts/auto_refresh_home.php',function(response1){
-            //     response1 = JSON.parse(response1);
-            //     sumResponse = response1;
-            //     jQuery.getJSON('api/chat_messages.php',function(response2){
-            //         sumResponse[2] = response2.reverse();
-            //         //$('#chatbox').empty();
-            //         onSumResponse(JSON.stringify(sumResponse));
-            //     });
-            // });
+            
         }
 
         function disableForm() {
