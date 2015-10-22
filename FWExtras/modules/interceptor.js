@@ -27,6 +27,10 @@ function hasLocalAsset(path){
 
 var optionsLoaded = false;
 
+$(document).on('FWExtrasLocalAssetIndexLoaded', function(){
+    assetsLoaded = true;
+});
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.greeting === 'GlobalOptionsLoaded' || request.greeting === 'GlobalOptionsUpdated') {
         _globalOptions = request.globalOptions;
@@ -55,28 +59,26 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             {urls: ["*://108.197.28.233/*"]},["blocking"]
         );
 
-        $(document).on('FWExtrasLocalAssetIndexLoaded', function(){
-            //Redirects asset requests to local copies for speed
-            chrome.webRequest.onBeforeRequest.addListener(
-                function(details) {
-                    if(details.type !== 'xmlhttprequest' && _globalOptions.interceptor_localassets === true){
+        //Redirects asset requests to local copies for speed
+        chrome.webRequest.onBeforeRequest.addListener(
+            function(details) {
+                if(details.type !== 'xmlhttprequest' && _globalOptions.interceptor_localassets === true){
 
-                        var a = document.createElement('a');
-                        a.href = details.url;
+                    var a = document.createElement('a');
+                    a.href = details.url;
 
-                        var requestedAsset = a.pathname;
-                        if(hasLocalAsset(requestedAsset)) {
-                            console.log('✅ '+chrome.extension.getURL('/assets'+requestedAsset));
-                            return {redirectUrl: chrome.extension.getURL('/assets'+requestedAsset)};
-                        }
-                        else {
-                            console.log('❌ '+requestedAsset);
-                        }
+                    var requestedAsset = a.pathname;
+                    if(hasLocalAsset(requestedAsset)) {
+                        console.log('✅ '+chrome.extension.getURL('/assets'+requestedAsset));
+                        return {redirectUrl: chrome.extension.getURL('/assets'+requestedAsset)};
                     }
-                    return {redirectUrl: details.url};
-                }, {urls: ["*://108.197.28.233/*"]},["blocking"]
-            );
-        });
+                    else {
+                        console.log('❌ '+requestedAsset);
+                    }
+                }
+                return {redirectUrl: details.url};
+            }, {urls: ["*://108.197.28.233/*"]},["blocking"]
+        );
 
     }
 });
