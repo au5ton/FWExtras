@@ -13,14 +13,14 @@ function getChatMessageStrings() {
     }
 }
 
-$(document).ready(function(){
-    $(document).on('FWExtrasChatHistoryInitialLoad', function(){
+Options.get(function(options){
+  $(document).on('FWExtrasChatHistoryInitialLoad', function(){
 
-        if(window.location.pathname === '/home.php' && _globalOptions.mentions_highlighter === true) {
-            //getChatMessageStrings();
-            console.log('hello world?', _chatHistory);
+      if(window.location.pathname === '/home.php' && options.mentions_highlighter === true) {
+          //getChatMessageStrings();
+          console.log('hello world?', _chatHistory);
 
-        }
+      }
 
-    });
+  });
 });

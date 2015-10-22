@@ -37,3 +37,7 @@ function unescapeHTML(html) {
     _escape.innerHTML = html;
     return _escape.textContent;
 }
+
+function contains(value, array) {
+  return (array.indexOf(value) > -1);
+}

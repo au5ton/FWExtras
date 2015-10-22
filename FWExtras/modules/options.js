@@ -1,7 +1,8 @@
 /*
 *  options.js
 *
-*  Manages all things related to the settings pane and its seeds
+*  Provides a simple API to get and set options to chrome.storage
+*  Works effortlessly in content scripts and background scripts
 *
 */
 
