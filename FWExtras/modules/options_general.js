@@ -1,28 +1,15 @@
 /*
-*  Options.js
+*  options_general.js
 *
-*  Manages all things related to the settings pane
-*  Referred to as 'names' internally because I type 'alias' wrong too many times
+*  Methods and things relevant to both options_foreground.js and options_background.js
 *
 */
+
 
 var _optionsChangedEvent = new Event('FWExtrasOptionsUpdated');
 var _optionsLoadedEvent = new Event('FWExtrasOptionsLoaded');
 
 var _globalOptions = {};
-
-var _optionsElement = document.createElement('a');
-_optionsElement.setAttribute('class','dropdown_btn');
-_optionsElement.setAttribute('href',chrome.extension.getURL('options.html'));
-_optionsElement.setAttribute('target','_blank');
-_optionsElement.setAttribute('onmouseover','hoverNav(this);showNav(\'settings\')');
-_optionsElement.setAttribute('onmouseout','hoverOut(this)');
-_optionsElement.setAttribute('id','options_button');
-_optionsElement.innerHTML = 'FWExtras options';
-
-$(document).ready(function(){
-    $('#settings_dropdown').append(_optionsElement);
-});
 
 // Saves options to chrome.storage
 function save_options() {
@@ -60,13 +47,6 @@ function save_options() {
     });
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if(request.greeting === 'GlobalOptionsLoaded' || request.greeting === 'GlobalOptionsUpdated') {
-        _globalOptions = request.globalOptions;
-        console.log('Global options loaded or updated (foreground):', _globalOptions);
-    }
-});
-
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options(atOptionsPage) {
@@ -96,14 +76,6 @@ function restore_options(atOptionsPage) {
             greeting: 'GlobalOptionsLoaded',
             globalOptions: _globalOptions
         });
-        console.log(_globalOptions);
+        //console.log(_globalOptions);
     });
-}
-
-if(window.location.pathname === '/options.html') {
-    restore_options(true);
-    document.getElementById('save').addEventListener('click',save_options);
-}
-else {
-    restore_options();
 }

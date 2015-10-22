@@ -7,12 +7,16 @@
 
 
 $(document).ready(function(){
-    /*var materialIcons = document.createElement('link');
-    materialIcons.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-    materialIcons.rel = 'stylesheet';
-    $($(document.head).children()[0]).after(materialIcons);*/
 
-    if(window.location.pathname === '/home.php') {
-        //
-    }
+    var _optionsElement = document.createElement('a');
+    _optionsElement.setAttribute('class','dropdown_btn');
+    _optionsElement.setAttribute('href',chrome.extension.getURL('options.html'));
+    _optionsElement.setAttribute('target','_blank');
+    _optionsElement.setAttribute('onmouseover','hoverNav(this);showNav(\'settings\')');
+    _optionsElement.setAttribute('onmouseout','hoverOut(this)');
+    _optionsElement.setAttribute('id','options_button');
+    _optionsElement.innerHTML = 'FWExtras options';
+
+    $('#settings_dropdown').append(_optionsElement);
+
 });

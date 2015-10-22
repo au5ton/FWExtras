@@ -9,11 +9,20 @@
 //TODO: display indicator if a chat message is still in-progress of sending
 
 var _chatHistory = [];
+var _loadedChatIds = [];
 
 if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
     jQuery.getJSON('api/chat_messages.php',function(res){
         _chatHistory = res.reverse();
     });
+}
+
+function refreshLoadedChatIds() {
+    _loadedChatIds = [];
+    var chats = $('.msg_rcvd');
+    for(var i = 0; i < chats.length; i++) {
+        _loadedChatIds.push(parseInt(chats[i].getAttribute('data-msgid')));
+    }
 }
 
 function sortChatHistoryById(a,b) {
@@ -29,6 +38,9 @@ function sortChatHistoryById(a,b) {
 }
 
 $(document).ready(function(){
+
+    refreshLoadedChatIds();
+
     if(window.location.pathname === '/home.php' && _globalOptions.chat_base === true) {
 
         jQuery.getJSON('api/chat_messages.php',function(res){

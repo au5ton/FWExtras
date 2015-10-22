@@ -8,7 +8,7 @@
 var _localAssetIndexLoadedEvent = new Event('FWExtrasLocalAssetIndexLoaded');
 var _assetIndex = [];
 var _globalOptions = {};
-
+var assetsLoaded = false;
 
 jQuery.get(chrome.extension.getURL('../assets/index.json'), function(data){
     _assetIndex = JSON.parse(data);
@@ -25,53 +25,61 @@ function hasLocalAsset(path){
     return false;
 }
 
-$(document).on('FWExtrasLocalAssetIndexLoaded', function(){
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        if(request.greeting === 'GlobalOptionsLoaded' || request.greeting === 'GlobalOptionsUpdated') {
-            _globalOptions = request.globalOptions;
-            console.log('Global options loaded or updated (background):', _globalOptions);
-        }
-    });
+var optionsLoaded = false;
 
-    //Blocks out the sites JavaScript chat refresher so we can use our own chat refresh code
-    chrome.webRequest.onBeforeRequest.addListener(
-        function(details) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if(request.greeting === 'GlobalOptionsLoaded' || request.greeting === 'GlobalOptionsUpdated') {
+        _globalOptions = request.globalOptions;
+        //console.log('Global options loaded or updated (background):', _globalOptions);
 
-            if(_globalOptions.chat_base === true) {
+        //Blocks out the sites JavaScript chat refresher so we can use our own chat refresh code
+        chrome.webRequest.onBeforeRequest.addListener(
+            function(details) {
                 var a = document.createElement('a');
                 a.href = details.url;
-                //console.log(a.pathname);
-                if(a.pathname === '/scripts/auto_refresh_home.js') {
-                    console.log('Blocking '+a.pathname);
-                    return {cancel: true};
-                }
-            }
-            else {
-                return {cancel: false};
-            }
-
-        },
-        {urls: ["*://108.197.28.233/*"]},["blocking"]
-    );
-
-    //Redirects asset requests to local copies for speed
-    chrome.webRequest.onBeforeRequest.addListener(
-        function(details) {
-            if(details.type !== 'xmlhttprequest' && _globalOptions.interceptor_localassets === true){
-
-                var a = document.createElement('a');
-                a.href = details.url;
-
-                var requestedAsset = a.pathname;
-                if(hasLocalAsset(requestedAsset)) {
-                    console.log('✅ '+chrome.extension.getURL('/assets'+requestedAsset));
-                    return {redirectUrl: chrome.extension.getURL('/assets'+requestedAsset)};
+                if(_globalOptions.chat_base === true) {
+                    //console.log(a.pathname);
+                    if(a.pathname === '/scripts/auto_refresh_home.js') {
+                        console.log('Blocking '+a.pathname);
+                        return {cancel: true};
+                    }
                 }
                 else {
-                    console.log('❌ '+requestedAsset);
+                    if(a.pathname === '/scripts/auto_refresh_home.js') {
+                        console.log('NOT blocking '+a.pathname);
+                    }
+                    return {cancel: false};
                 }
-            }
-            return {redirectUrl: details.url};
-        }, {urls: ["*://108.197.28.233/*"]},["blocking"]
-    );
+
+            },
+            {urls: ["*://108.197.28.233/*"]},["blocking"]
+        );
+
+        $(document).on('FWExtrasLocalAssetIndexLoaded', function(){
+            //Redirects asset requests to local copies for speed
+            chrome.webRequest.onBeforeRequest.addListener(
+                function(details) {
+                    if(details.type !== 'xmlhttprequest' && _globalOptions.interceptor_localassets === true){
+
+                        var a = document.createElement('a');
+                        a.href = details.url;
+
+                        var requestedAsset = a.pathname;
+                        if(hasLocalAsset(requestedAsset)) {
+                            console.log('✅ '+chrome.extension.getURL('/assets'+requestedAsset));
+                            return {redirectUrl: chrome.extension.getURL('/assets'+requestedAsset)};
+                        }
+                        else {
+                            console.log('❌ '+requestedAsset);
+                        }
+                    }
+                    return {redirectUrl: details.url};
+                }, {urls: ["*://108.197.28.233/*"]},["blocking"]
+            );
+        });
+
+    }
 });
+
+
+restore_options();
