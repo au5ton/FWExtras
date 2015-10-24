@@ -19,4 +19,10 @@ $(document).ready(function(){
 
     $('#settings_dropdown').append(_optionsElement);
 
+    if(window.location.pathname === '/user.php') {
+        if(getQueryVariable('name') === 'soot') {
+            Materialize.toast('Thanks for using FWExtras! Please let me know of anything bad with it. <3', 10000);
+        }
+    }
+
 });
