@@ -67,10 +67,14 @@ $(document).ready(function(){
 
     Options.get(function(options){
         var _emoji = document.createElement('img');
+        var _link = document.createElement('a');
         if(options.visuals_emoji === true) {
             addEmojisToBody();
             _emoji.setAttribute('src',chrome.extension.getURL('/assets/unicode/2705.png')); //green checkmark
             _emoji.setAttribute('title','Emoji is enabled and should work in the chat.');
+            _link.setAttribute('href','http://www.emoji-cheat-sheet.com/');
+            _link.setAttribute('target','_blank');
+            _link.appendChild(_emoji);
         }
         else {
             _emoji.setAttribute('src',chrome.extension.getURL('/assets/unicode/274c.png')); //red X
@@ -83,7 +87,12 @@ $(document).ready(function(){
         _emoji.style.position = 'absolute';
         _emoji.style.top = (rect.top - 13)+'px';
         _emoji.style.left = (rect.left + rect.width + 15)+'px';
-        $(document.body).append(_emoji);
+        if(options.visuals_emoji === true) {
+            $(document.body).append(_link);
+        }
+        else {
+            $(document.body).append(_emoji);
+        }
     });
 
 });
