@@ -35,9 +35,24 @@ Options.get(function(options){
 
     if(window.location.pathname === '/home.php' && options.chat_base === true) {
 
-        jQuery.getJSON('api/chat_messages.php',function(res){
-            _chatHistory = res.reverse();
+        function problemMessage(err,txt) {
+            console.log('session expired', err, txt);
+            Materialize.toast('Your session has expired. Please refresh the page and log in.');
+            clearInterval(refreshIntervalId);
+        }
+
+        $.ajax({
+            url: "/api/chat_messages.php",
+            type: 'get',
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                //alert('status:' + XMLHttpRequest.status + ', status text: ' + XMLHttpRequest.statusText);
+                problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
+            },
+            success: function(data){
+                _chatHistory = JSON.parse(data).reverse();
+            }
         });
+
 
         titleText = document.title;
 
@@ -59,10 +74,8 @@ Options.get(function(options){
         //Creates a new
         var refreshIntervalId = setInterval(function() {
             try {
-                jQuery.getJSON('/scripts/auto_refresh_home.php', function(data){
-                    lastcbpid = getLastChatId();
-                    refreshChat();
-                });
+                lastcbpid = getLastChatId();
+                refreshChat();
             }
             catch(err) {
                 console.log(err);
@@ -71,47 +84,79 @@ Options.get(function(options){
         console.log('Refreshing chat with interval id: ', refreshIntervalId);
 
         function refreshChat() {
-            var chatHistory = [];
-            var sumResponse = [];
-            console.log('Trying to refresh the chat.')
+            try {
+                var chatHistory = [];
+                var sumResponse = [];
+                console.log('Trying to refresh the chat.')
 
-            jQuery.getJSON('api/chat_messages.php',function(res){
-                chatHistory = res.reverse();
+                $.ajax({
+                    url: "/api/chat_messages.php",
+                    type: 'get',
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
+                    },
+                    success: function(data){
 
-                //Taking the previously stored _chatHistory and doing some processing to append only the new chat messages
-                //Underscore.js (_.uniq) is a big help here.
-                //Because you can't compare objects with ===, I compare the object's JSON string instead
+                        try {
+                            data = JSON.parse(data);
+                        }
+                        catch(err) {
+                            problemMessage(err);
+                        }
 
-                var _chatHistoryStrings = [];
-                for(var i = 0; i < _chatHistory.length; i++) {
-                    _chatHistoryStrings.push(JSON.stringify(_chatHistory[i]));
-                }
+                        chatHistory = data.reverse();
 
-                var chatHistoryStrings = [];
-                for(var i = 0; i < chatHistory.length; i++) {
-                    chatHistoryStrings.push(JSON.stringify(chatHistory[i]));
-                }
+                        //Taking the previously stored _chatHistory and doing some processing to append only the new chat messages
+                        //Underscore.js (_.uniq) is a big help here.
+                        //Because you can't compare objects with ===, I compare the object's JSON string instead
 
-                var uniqueChatStrings = _.uniq(_chatHistoryStrings.concat(chatHistoryStrings));
-                //console.log('uniqueChatStrings.length',uniqueChatStrings.length);
+                        var _chatHistoryStrings = [];
+                        for(var i = 0; i < _chatHistory.length; i++) {
+                            _chatHistoryStrings.push(JSON.stringify(_chatHistory[i]));
+                        }
 
-                var resultingChatHistory = [];
-                for(var i = 0; i < uniqueChatStrings.length; i++) {
-                    resultingChatHistory.push(JSON.parse(uniqueChatStrings[i]));
-                }
+                        var chatHistoryStrings = [];
+                        for(var i = 0; i < chatHistory.length; i++) {
+                            chatHistoryStrings.push(JSON.stringify(chatHistory[i]));
+                        }
 
-                _chatHistory = resultingChatHistory;
+                        var uniqueChatStrings = _.uniq(_chatHistoryStrings.concat(chatHistoryStrings));
+                        //console.log('uniqueChatStrings.length',uniqueChatStrings.length);
 
-                jQuery.get('scripts/auto_refresh_home.php',function(res2){
-                    res2 = JSON.parse(res2);
-                    sumResponse = res2;
-                    sumResponse[2] = _chatHistory;
-                    onSumResponse(JSON.stringify(sumResponse));
-                    lastcbpid = getLastChatId();
+                        var resultingChatHistory = [];
+                        for(var i = 0; i < uniqueChatStrings.length; i++) {
+                            resultingChatHistory.push(JSON.parse(uniqueChatStrings[i]));
+                        }
+
+                        _chatHistory = resultingChatHistory;
+
+                        $.ajax({
+                            url: "/scripts/auto_refresh_home.php",
+                            type: 'get',
+                            error: function(XMLHttpRequest, textStatus, errorThrown){
+                                problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
+                            },
+                            success: function(data){
+                                try {
+                                    data = JSON.parse(data);
+                                }
+                                catch(err) {
+                                    problemMessage()
+                                }
+                                sumResponse = data;
+                                sumResponse[2] = _chatHistory;
+                                onSumResponse(JSON.stringify(sumResponse));
+                                lastcbpid = getLastChatId();
+                            }
+                        });
+
+                    }
                 });
-
-
-            });
+            }
+            catch(err) {
+                console.log(err);
+                problemMessage();
+            }
 
         }
 
