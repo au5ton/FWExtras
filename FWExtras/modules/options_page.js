@@ -30,6 +30,7 @@ function save_options() {
   var mentions_highlighter = document.getElementById('mentions_highlighter').checked;
   var blackjack_base = document.getElementById('blackjack_base').checked;
   var loteria_suggestions = document.getElementById('loteria_suggestions').checked;
+  var visuals_emoji = document.getElementById('visuals_emoji').checked;
   Options.set({
     chat_base: chat_base,
     nicknames_base: nicknames_base,
@@ -37,7 +38,8 @@ function save_options() {
     mentions_pane: mentions_pane,
     mentions_highlighter: mentions_highlighter,
     blackjack_base: blackjack_base,
-    loteria_suggestions: loteria_suggestions
+    loteria_suggestions: loteria_suggestions,
+    visuals_emoji: visuals_emoji
   }, function() {
     // Update status to let user know options were saved.
     if(needsReload === true) {
@@ -68,11 +70,34 @@ function restore_options() {
     document.getElementById('mentions_highlighter').checked = items.mentions_highlighter;
     document.getElementById('blackjack_base').checked = items.blackjack_base;
     document.getElementById('loteria_suggestions').checked = items.loteria_suggestions;
+    document.getElementById('visuals_emoji').checked = items.visuals_emoji;
     Materialize.toast('Options restored.',4000);
   });
 }
 
 if(window.location.pathname === '/options.html') {
   document.getElementById('save').addEventListener('click',save_options);
+
+  Options.get(function(options){
+      if(options.visuals_emoji === true) {
+          var all_path = '/assets/unicode/';
+          emoji.img_path = all_path;
+          emoji.use_sheet = false;
+          emoji.img_set = 'apple';
+          emoji.text_mode = false;
+          emoji.replace_mode = 'img';
+          emoji.supports_css = false;
+          emoji.include_title = true;
+          emoji.img_sets = {
+              'apple'    : {'path' : all_path, 'sheet' : '/emoji-data/sheet_apple_64.png', 'mask' : 1 },
+              'google'   : {'path' : all_path, 'sheet' : '/emoji-data/sheet_google_64.png', 'mask' : 2 },
+              'twitter'  : {'path' : all_path, 'sheet' : '/emoji-data/sheet_twitter_64.png', 'mask' : 4 },
+              'emojione' : {'path' : all_path, 'sheet' : '/emoji-data/sheet_emojione_64.png', 'mask' : 8 }
+          };
+
+          $('span').emoji();
+      }
+  });
+
 }
 restore_options();

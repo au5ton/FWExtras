@@ -29,6 +29,7 @@
         "assets/*",
         "lib/*",
         "css/*",
+        "img/*",
         "options.html"
     ],
     "content_scripts" : [{
@@ -43,6 +44,7 @@
             "lib/jquery-plugins.js",
             "lib/underscore-min.js",
             "lib/materialize.js",
+            "lib/emoji.js",
             "modules/options.js",
             "modules/util.js",
             "modules/fluffcode.js",

@@ -20,7 +20,8 @@ function Options() {
             mentions_pane: false,
             mentions_highlighter: false,
             blackjack_base: false,
-            loteria_suggestions: false
+            loteria_suggestions: false,
+            visuals_emoji: true
         }, function(items) {
             this.loadedOptions = items;
             callback(this.loadedOptions);
@@ -35,7 +36,8 @@ function Options() {
             mentions_pane: data.mentions_pane,
             mentions_highlighter: data.mentions_highlighter,
             blackjack_base: data.blackjack_base,
-            loteria_suggestions: data.loteria_suggestions
+            loteria_suggestions: data.loteria_suggestions,
+            visuals_emoji: data.visuals_emoji
         }, function() {
             callback();
         });

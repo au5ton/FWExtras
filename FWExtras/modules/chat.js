@@ -145,7 +145,7 @@ Options.get(function(options){
                                 }
                                 sumResponse = data;
                                 sumResponse[2] = _chatHistory;
-                                onSumResponse(JSON.stringify(sumResponse));
+                                onSumResponse(JSON.stringify(sumResponse), undefined, options.visuals_emoji);
                                 lastcbpid = getLastChatId();
                             }
                         });

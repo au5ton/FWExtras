@@ -11,7 +11,7 @@ var notifs = 0;
 var lastnotif = 0;
 var lastcbpid;
 
-function onSumResponse(serverResponse, forceapply)
+function onSumResponse(serverResponse, forceapply, emojis_enabled)
 {
     //if (xhReq.readyState != 4)  { return; }
     //var serverResponse = xhReq.responseText;
@@ -54,8 +54,12 @@ function onSumResponse(serverResponse, forceapply)
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
                     content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
-                    //content.appendChild(document.createTextNode(chat[i]['content']));
-                    content.innerHTML = chat[i]['content']; //Fixes emotes and links
+                    if(emojis_enabled === true) {
+                        content.innerHTML = emoji_replace_colons(chat[i]['content']);
+                    }
+                    else {
+                        content.innerHTML = chat[i]['content'];
+                    }
                     var pic = document.createElement("DIV");
                     pic.setAttribute('class', 'prof_pic_sent');
                     pic.backgroundColor = "#" + chat[i]['secondary_color'];
@@ -117,8 +121,12 @@ function onSumResponse(serverResponse, forceapply)
                     content.style.color = "#" + chat[i]['color'];
                     content.style.backgroundColor = "#" + chat[i]['secondary_color'];
                     content.style.fontFamily = chat[i]['font']; //We need CSS values EDIT: now we have them
-                    //content.appendChild(document.createTextNode(chat[i]['content']));
-                    content.innerHTML = chat[i]['content']; //Fixes emotes and links
+                    if(emojis_enabled === true) {
+                        content.innerHTML = emoji_replace_colons(chat[i]['content']);
+                    }
+                    else {
+                        content.innerHTML = chat[i]['content'];
+                    }
                     var spacer = document.createElement("DIV");
                     spacer.setAttribute('class', "spacer_rcvd");
                     if(chat[i]['attachmentid'] != '0')

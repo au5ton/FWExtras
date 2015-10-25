@@ -102,15 +102,20 @@
             </p>
         </label>
         <label>
-            <input type="checkbox" id="visuals_base">
-            <h3>Improved visuals</h3>
+            <h3>Visual options</h3>
             <p class="module-desc">
-                This currently doesn't do anything, but is expected to maybe someday idk. Toggling this doesn't actually save anywhere/
+                Offers various visual improvements throughout the site, including emojis!
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="visuals_emoji"> Write emojis with colons in the chat and in other places (:smile: &#8594; <span>:smile:</span>) (<a href="http://www.emoji-cheat-sheet.com/">cheatsheet</a>)
             </p>
         </label>
-        
+
         <button id="save">Save</button>
     </div>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/jquery-plugins.js"></script>
+    <script src="lib/emoji.js"></script>
     <script src="modules/options.js"></script>
     <script src="modules/options_page.js"></script>
 </body>
