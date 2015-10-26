@@ -106,8 +106,8 @@ span.emoji {
 	*vertical-align: auto;
 	*zoom: 1;
 	*display: inline;
-	width: 1em;
-	height: 1em;
+	width: 1.5em;
+	height: 1.5em;
 	background-size: 1em;
 	background-repeat: no-repeat;
 	text-indent: -9999px;
@@ -141,6 +141,6 @@ span.emoji-inner {
 }
 
 img.emoji {
-	width: 1em;
-	height: 1em;
+	width: 1.5em;
+	height: 1.5em;
 }
