@@ -13,4 +13,5 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [X] Saving site image assets offline for quicker site load speeds
 - [ ] Blackjack helper
 - [ ] Loteria helper
-- [ ] Chat filtering (pseudo chat rooms, muting)
+- [ ] Chat filtering (~~pseudo chat rooms~~, muting)
+- [X] Emojis in the chat 
