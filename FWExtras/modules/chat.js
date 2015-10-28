@@ -10,6 +10,7 @@
 
 var _chatHistory = [];
 var _loadedChatIds = [];
+var refreshIntervalId;
 
 function refreshLoadedChatIds() {
     _loadedChatIds = [];
@@ -35,17 +36,27 @@ Options.get(function(options){
 
     if(window.location.pathname === '/home.php' && options.chat_base === true) {
 
-        function problemMessage(err,txt) {
-            console.log('session expired', err, txt);
-            Materialize.toast('Your session has expired. Please refresh the page and log in.');
-            clearInterval(refreshIntervalId);
+        function problemMessage(err,txt,problem) {
+            console.error('!! A PROBLEM HAPPENED', err, txt);
+            if(problem === 'session expired') {
+                Materialize.toast('Session likely expired. Please refresh the page.');
+                clearInterval(refreshIntervalId);
+            }
+            else if(problem === 'data processing') {
+                Materialize.toast('Had a problem processing data.');
+            }
+            else {
+                Materialize.toast('A problem happened. Usually trying whatever you did again helps, or refreshing the page if nothing else fixes it. Slide this message to the side to remove it.');
+            }
         }
 
         $.ajax({
             url: "/api/chat_messages.php",
             type: 'get',
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                //alert('status:' + XMLHttpRequest.status + ', status text: ' + XMLHttpRequest.statusText);
+                if(XMLHttpRequest.status === 404) {
+                    problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText,'session expired');
+                }
                 problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
             },
             success: function(data){
@@ -72,7 +83,7 @@ Options.get(function(options){
         }
 
         //Creates a new
-        var refreshIntervalId = setInterval(function() {
+        refreshIntervalId = setInterval(function() {
             try {
                 lastcbpid = getLastChatId();
                 refreshChat();
@@ -80,7 +91,7 @@ Options.get(function(options){
             catch(err) {
                 console.log(err);
             }
-        },5000);
+        },options.chat_refresh_frequency);
         console.log('Refreshing chat with interval id: ', refreshIntervalId);
 
         function refreshChat() {
@@ -93,6 +104,9 @@ Options.get(function(options){
                     url: "/api/chat_messages.php",
                     type: 'get',
                     error: function(XMLHttpRequest, textStatus, errorThrown){
+                        if(XMLHttpRequest.status === 404) {
+                            problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText,'session expired');
+                        }
                         problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
                     },
                     success: function(data){
@@ -101,7 +115,8 @@ Options.get(function(options){
                             data = JSON.parse(data);
                         }
                         catch(err) {
-                            problemMessage(err);
+                            //alert('three');
+                            problemMessage(err, undefined, 'data processing');
                         }
 
                         chatHistory = data.reverse();
@@ -134,6 +149,10 @@ Options.get(function(options){
                             url: "/scripts/auto_refresh_home.php",
                             type: 'get',
                             error: function(XMLHttpRequest, textStatus, errorThrown){
+                                //alert('four');
+                                if(XMLHttpRequest.status === 404) {
+                                    problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText,'session expired');
+                                }
                                 problemMessage(XMLHttpRequest.status, XMLHttpRequest.statusText);
                             },
                             success: function(data){
@@ -141,7 +160,8 @@ Options.get(function(options){
                                     data = JSON.parse(data);
                                 }
                                 catch(err) {
-                                    problemMessage()
+                                    //alert('five');
+                                    problemMessage(err, undefined, 'data processing');
                                 }
                                 sumResponse = data;
                                 sumResponse[2] = _chatHistory;

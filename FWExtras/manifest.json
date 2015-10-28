@@ -2,9 +2,9 @@
     "manifest_version": 2,
 
     "name": "FWExtras (BETA)",
-    "version": "0.4.2",
+    "version": "0.4.3",
 
-    "description": "Enhances your Fluff World experience.",
+    "description": "Enhances your Fluff World experience. THIS IS A BETA EXTENSION! PLEASE SUBMIT ALL PROBLEMS YOU HAVE WITH IT TO SOOT!",
     "icons": {
         "16": "img/icon16.png",
         "48": "img/icon48.png",

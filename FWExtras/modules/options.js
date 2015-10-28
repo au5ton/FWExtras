@@ -21,7 +21,8 @@ function Options() {
             mentions_highlighter: false,
             blackjack_base: false,
             loteria_suggestions: false,
-            visuals_emoji: true
+            visuals_emoji: true,
+            chat_refresh_frequency: 5000
         }, function(items) {
             this.loadedOptions = items;
             callback(this.loadedOptions);
@@ -37,7 +38,8 @@ function Options() {
             mentions_highlighter: data.mentions_highlighter,
             blackjack_base: data.blackjack_base,
             loteria_suggestions: data.loteria_suggestions,
-            visuals_emoji: data.visuals_emoji
+            visuals_emoji: data.visuals_emoji,
+            chat_refresh_frequency: data.chat_refresh_frequency
         }, function() {
             callback();
         });

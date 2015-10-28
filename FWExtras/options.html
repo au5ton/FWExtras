@@ -45,6 +45,22 @@
     .toast {
         background-color: #0d900b;
     }
+
+    .cool {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transition: all 0.25s;
+    }
+    .cool:hover {
+        width: 20px;
+        height: 20px;
+    }
+
+    #chat_refresh_frequency {
+        width: 50px;
+    }
+
     </style>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="lib/materialize.js"></script>
@@ -54,7 +70,7 @@
     <div class="container">
         <h1>FWExtras Options</h1>
         <p class="subtitle">
-            Don't forget to press the Save button when you're done.
+            Don't forget to press the Save button when you're done. <img title="Click the COOL button to reload the extension :)" class="cool" src="assets/unicode/1f192.png">
         </p>
         <label>
             <input type="checkbox" id="chat_base">
@@ -62,6 +78,8 @@
             <p class="module-desc">
                 This uses Ajax HTTP requests to enable you to send chat messages and receive them without reloading your browser. If this get's too buggy for your liking, please inform the developer and disable this option if you'd like.
             </p>
+            <span class="module-option">Chat refresh frequency: </span>
+            <input type="text" id="chat_refresh_frequency"> milliseconds
         </label>
         <label>
             <input type="checkbox" id="nicknames_base">
