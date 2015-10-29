@@ -42,7 +42,6 @@ jQuery.get(chrome.extension.getURL('../assets/index.json'), function(data){
                     if(a.pathname === '/scripts/auto_refresh_home.js') {
                         console.log('NOT blocking '+a.pathname);
                     }
-                    return {cancel: false};
                 }
 
                 //Redirects asset requests to local copies for speed

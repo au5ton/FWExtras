@@ -22,7 +22,8 @@
         "storage",
         "*://108.197.28.233/*",
         "webRequest",
-        "webRequestBlocking"
+        "webRequestBlocking",
+        "tabs"
     ],
     "options_page": "options.html",
     "web_accessible_resources": [

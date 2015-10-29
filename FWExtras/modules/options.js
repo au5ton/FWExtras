@@ -16,7 +16,7 @@ function Options() {
         chrome.storage.local.get({
             chat_base: true,
             nicknames_base: true,
-            interceptor_localassets: false,
+            interceptor_localassets: true,
             mentions_pane: false,
             mentions_highlighter: false,
             blackjack_base: false,

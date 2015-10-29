@@ -5,10 +5,13 @@
 *
 */
 
+document.write('This background page is intentionally blank. Please press Ctrl+Shift+I to open the dev tools.');
+
 var needsReload = false;
 
 var optionsThatNeedRestart = [
-    'interceptor_localassets'
+    'interceptor_localassets',
+    'chat_base'
 ];
 
 $('input[type=\'checkbox\']').change(function(){
@@ -28,6 +31,10 @@ $('.cool').on('click', function(){
         window.onbeforeunload = undefined;
         chrome.runtime.reload();
     },2000);
+});
+
+$('.tv').on('click', function(){
+  chrome.tabs.create({url: chrome.extension.getURL('_generated_background_page.html')});
 });
 
 //http://developer.chrome.com/extensions/runtime.html#method-reload
