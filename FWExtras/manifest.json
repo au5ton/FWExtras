@@ -1,55 +1,15 @@
 {
     "manifest_version": 2,
 
-    "name": "FWExtras (BETA)",
-    "version": "0.5",
+    "name": "FWExtras (Removed)",
+    "version": "0.4.6",
 
-    "description": "Enhances your Fluff World experience. THIS IS A BETA EXTENSION! PLEASE SUBMIT ALL PROBLEMS YOU HAVE WITH IT TO SOOT!",
+    "description": "Enhances your Fluff World experience. (Removed from the Chrome Web Store, this extension currently does nothing)",
     "icons": {
         "16": "img/icon16.png",
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
-    "background": {
-        "persistent": true,
-        "scripts": [
-            "lib/jquery-2.1.4.min.js",
-            "modules/options.js",
-            "modules/interceptor.js"
-        ]
-    },
     "permissions": [
-        "storage",
-        "*://108.197.28.233/*",
-        "webRequest",
-        "webRequestBlocking",
-        "tabs"
     ],
-    "options_page": "options.html",
-    "web_accessible_resources": [
-        "assets/*",
-        "lib/*",
-        "css/*",
-        "img/*",
-        "options.html"
-    ],
-    "content_scripts" : [{
-        "matches": [
-            "*://108.197.28.233/*"
-        ],
-        "css": [
-            "css/fw-extra.css"
-        ],
-        "js" : [
-            "lib/jquery-2.1.4.min.js",
-            "lib/jquery-plugins.js",
-            "lib/underscore-min.js",
-            "lib/materialize.js",
-            "lib/emoji.js",
-            "modules/options.js",
-            "modules/util.js",
-            "modules/visual.js",
-            "modules/nicknames.js"
-        ]
-        }]
     }

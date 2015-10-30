@@ -1,6 +1,8 @@
 # FWExtras
 A Chrome extension like Reddit Enhancement Suite that enhances your FW experience.
 
+Currently 'removed' from the Chrome Web Store.
+
 
 ###Planned features
 - [X] ~~Refresh the chat without reloading the page (automatic)~~ Already implemented by Fluff
