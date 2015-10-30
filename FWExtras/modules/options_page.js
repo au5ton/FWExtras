@@ -10,8 +10,7 @@ document.write('This background page is intentionally blank. Please press Ctrl+S
 var needsReload = false;
 
 var optionsThatNeedRestart = [
-    'interceptor_localassets',
-    'chat_base'
+    'interceptor_localassets'
 ];
 
 $('input[type=\'checkbox\']').change(function(){
@@ -41,35 +40,23 @@ $('.tv').on('click', function(){
 
 // Saves options to chrome.storage
 function save_options() {
-    var chat_base = document.getElementById('chat_base').checked;
     var nicknames_base = document.getElementById('nicknames_base').checked;
     var interceptor_localassets = document.getElementById('interceptor_localassets').checked;
     var mentions_pane = document.getElementById('mentions_pane').checked;
     var mentions_highlighter = document.getElementById('mentions_highlighter').checked;
     var blackjack_base = document.getElementById('blackjack_base').checked;
-    var loteria_suggestions = document.getElementById('loteria_suggestions').checked;
+    var loteria_base = document.getElementById('loteria_suggestions').checked;
     var visuals_emoji = document.getElementById('visuals_emoji').checked;
-    var chat_refresh_frequency = parseInt(document.getElementById('chat_refresh_frequency').value);
-    if(isNaN(chat_refresh_frequency)) {
-        chat_refresh_frequency = 5000; //default
-    }
-    if(chat_refresh_frequency < 1000) {
-        chat_refresh_frequency = 1000;
-        Materialize.toast('Don\'t overload Fluff World. Chat refresh frequency must be over 1000.', 4000);
-    }
-    if(chat_refresh_frequency >= 15000) {
-        Materialize.toast('Over 15000? That\'s a really long time. The default is 5000 (5 seconds). Are you sure?', 4000);
-    }
+    var home_online_users = document.getElementById('home_online_users').checked;
     Options.set({
-        chat_base: chat_base,
         nicknames_base: nicknames_base,
         interceptor_localassets: interceptor_localassets,
         mentions_pane: mentions_pane,
         mentions_highlighter: mentions_highlighter,
         blackjack_base: blackjack_base,
-        loteria_suggestions: loteria_suggestions,
+        loteria_base: loteria_base,
         visuals_emoji: visuals_emoji,
-        chat_refresh_frequency: chat_refresh_frequency
+        home_online_users: home_online_users
     }, function() {
         // Update status to let user know options were saved.
         if(needsReload === true) {
@@ -94,15 +81,14 @@ function save_options() {
 // stored in chrome.storage
 function restore_options() {
     Options.get(function(items) {
-        document.getElementById('chat_base').checked = items.chat_base;
         document.getElementById('nicknames_base').checked = items.nicknames_base;
         document.getElementById('interceptor_localassets').checked = items.interceptor_localassets;
         document.getElementById('mentions_pane').checked = items.mentions_pane;
         document.getElementById('mentions_highlighter').checked = items.mentions_highlighter;
         document.getElementById('blackjack_base').checked = items.blackjack_base;
-        document.getElementById('loteria_suggestions').checked = items.loteria_suggestions;
+        document.getElementById('loteria_base').checked = items.loteria_base;
         document.getElementById('visuals_emoji').checked = items.visuals_emoji;
-        document.getElementById('chat_refresh_frequency').value =  items.chat_refresh_frequency;
+        document.getElementById('home_online_users'.checked = items.home_online_users;
         Materialize.toast('Options restored.',4000);
     });
 }

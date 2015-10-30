@@ -11,7 +11,6 @@
     }
 
     .container {
-        display: inline-block;
         text-align: left;
         max-width: 600px;
         margin: 0 auto;
@@ -72,19 +71,12 @@
         <p class="subtitle">
             Don't forget to press the Save button when you're done.
             <div>
-              <img title="Click the COOL button to reload the extension :)" class="dev-tool cool" src="assets/unicode/1f192.png">
-              <img title="Click the TV button to open the background page." class="dev-tool tv" src="assets/unicode/1f4fa.png">
+                <h5 style="margin-bottom:0;">Debugging buttons</h5>
+                <p style="margin-top:0;">Don't press these unless you know what you're doing.</p>
+              <img title="Click the COOL button to reload the extension :)" class="dev-tool cool" src="assets/unicode/1f504.png">
+              <img title="Click the TV button to open the background page." class="dev-tool tv" src="assets/unicode/2139.png">
             </div>
         </p>
-        <label>
-            <input type="checkbox" id="chat_base">
-            <h3>Chat without refresh</h3>
-            <p class="module-desc">
-                This uses Ajax HTTP requests to enable you to send chat messages and receive them without reloading your browser. If this get's too buggy for your liking, please inform the developer and disable this option if you'd like.
-            </p>
-            <span class="module-option">Chat refresh frequency: </span>
-            <input type="text" id="chat_refresh_frequency"> milliseconds (default is 5000, leave it like that unless told to change it)
-        </label>
         <label>
             <input type="checkbox" id="nicknames_base">
             <h3>Nicknames</h3>
@@ -100,7 +92,23 @@
             </p>
         </label>
         <label>
-            <h3>Mentions</h3>
+            <input type="checkbox" id="home_online_users">
+            <h3>Currently online users</h3>
+            <p class="module-desc">
+                Automatically refreshes which users are online on the sidebar every 10 seconds
+            </p>
+        </label>
+        <label>
+            <h3>Visual options</h3>
+            <p class="module-desc">
+                Offers various visual improvements throughout the site, including emojis!
+            </p>
+            <p class="module-option">
+                <input type="checkbox" id="visuals_emoji"> Write emojis with colons in the chat and in other places (:smile: &#8594; <span>:smile:</span>) (<a href="http://www.emoji-cheat-sheet.com/">cheatsheet</a>)
+            </p>
+        </label>
+        <label>
+            <h3>Mentions (currently not implemented)</h3>
             <p class="module-desc">
                 Someone trying to get your attention? This option will enable a mentions pane on the homepage that let's you see who's mentioned you in the chat, as well as a highlighting chat messages with your username in them.
             </p>
@@ -112,7 +120,7 @@
             </p>
         </label>
         <label>
-            <h3>Games Helper</h3>
+            <h3>Games Helper (currently not implemented)</h3>
             <p class="module-desc">
                 Shows you the percentage chance that you'll bust in a blackjack game, highlights loteria cards that you can mark, and tells you when you can press the &iexcl;Buenas! button.
             </p>
@@ -120,16 +128,7 @@
                 <input type="checkbox" id="blackjack_base"> Blackjack bust chance
             </p>
             <p class="module-option">
-                <input type="checkbox" id="loteria_suggestions"> Loteria suggestions
-            </p>
-        </label>
-        <label>
-            <h3>Visual options</h3>
-            <p class="module-desc">
-                Offers various visual improvements throughout the site, including emojis!
-            </p>
-            <p class="module-option">
-                <input type="checkbox" id="visuals_emoji"> Write emojis with colons in the chat and in other places (:smile: &#8594; <span>:smile:</span>) (<a href="http://www.emoji-cheat-sheet.com/">cheatsheet</a>)
+                <input type="checkbox" id="loteria_base"> Loteria card history
             </p>
         </label>
 

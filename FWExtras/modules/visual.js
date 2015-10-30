@@ -102,3 +102,5 @@ window.onresize = function() {
     $('#emoji_indicator').css('top', (settings_rect.top - 13)+'px');
     $('#emoji_indicator').css('left', (settings_rect.left + settings_rect.width + 15)+'px');
 };
+
+//TODO: $(document).on('newchatmessage or some event name')

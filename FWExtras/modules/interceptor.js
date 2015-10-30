@@ -22,7 +22,6 @@ jQuery.get(chrome.extension.getURL('../assets/index.json'), function(data){
     console.log('Local asset index loaded.');
 
     Options.get(function(options){
-
         console.log('Options loaded:', options);
 
         //Blocks out the sites JavaScript chat refresher so we can use our own chat refresh code
@@ -30,19 +29,6 @@ jQuery.get(chrome.extension.getURL('../assets/index.json'), function(data){
             function(details) {
                 var a = document.createElement('a');
                 a.href = details.url;
-
-
-                if(options.chat_base === true) {
-                    if(a.pathname === '/scripts/auto_refresh_home.js') {
-                        console.log('Blocking '+a.pathname);
-                        return {cancel: true};
-                    }
-                }
-                else {
-                    if(a.pathname === '/scripts/auto_refresh_home.js') {
-                        console.log('NOT blocking '+a.pathname);
-                    }
-                }
 
                 //Redirects asset requests to local copies for speed
                 if(details.type !== 'xmlhttprequest' && options.interceptor_localassets === true){
@@ -58,13 +44,6 @@ jQuery.get(chrome.extension.getURL('../assets/index.json'), function(data){
 
             },
             {urls: ["*://108.197.28.233/*"]},["blocking"]
-        );
-
-
-        chrome.webRequest.onBeforeRequest.addListener(
-            function(details) {
-
-            }, {urls: ["*://108.197.28.233/*"]},["blocking"]
         );
 
     });

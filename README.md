@@ -1,11 +1,11 @@
-# fw-extras
+# FWExtras
 A Chrome extension like Reddit Enhancement Suite that enhances your FW experience.
 
 
 ###Planned features
-- [X] Refresh the chat without reloading the page (automatic)
-- [X] Send chat messages without reloading the page
-- [ ] Send private messages without reloading the page
+- [X] ~~Refresh the chat without reloading the page (automatic)~~ Already implemented by Fluff
+- [X] ~~Send chat messages without reloading the page~~ Already implemented by Fluff
+- [ ] ~~Send private messages without reloading the page~~ Cancelled feature
 - [X] Tag private nicknames to users ("who's this irl again?")
 - [X] ~~Turn text links into clickable links~~ Already implemented server-side
 - [ ] Mentioning users
@@ -14,4 +14,4 @@ A Chrome extension like Reddit Enhancement Suite that enhances your FW experienc
 - [ ] Blackjack helper
 - [ ] Loteria helper
 - [ ] Chat filtering (~~pseudo chat rooms~~, muting)
-- [X] Emojis in the chat 
+- [X] Emojis in the chat

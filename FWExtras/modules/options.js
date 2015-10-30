@@ -14,15 +14,14 @@ function Options() {
 
     this.get = function(callback) {
         chrome.storage.local.get({
-            chat_base: true,
             nicknames_base: true,
             interceptor_localassets: true,
             mentions_pane: false,
             mentions_highlighter: false,
             blackjack_base: false,
-            loteria_suggestions: false,
+            loteria_base: false,
             visuals_emoji: true,
-            chat_refresh_frequency: 5000
+            home_online_users: true
         }, function(items) {
             this.loadedOptions = items;
             callback(this.loadedOptions);
@@ -31,15 +30,14 @@ function Options() {
 
     this.set = function(data, callback) {
         chrome.storage.local.set({
-            chat_base: data.chat_base,
             nicknames_base: data.nicknames_base,
             interceptor_localassets: data.interceptor_localassets,
             mentions_pane: data.mentions_pane,
             mentions_highlighter: data.mentions_highlighter,
             blackjack_base: data.blackjack_base,
-            loteria_suggestions: data.loteria_suggestions,
+            loteria_base: data.loteria_base,
             visuals_emoji: data.visuals_emoji,
-            chat_refresh_frequency: data.chat_refresh_frequency
+            home_online_users: data.home_online_users
         }, function() {
             callback();
         });

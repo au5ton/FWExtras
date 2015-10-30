@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "FWExtras (BETA)",
-    "version": "0.4.3",
+    "version": "0.5",
 
     "description": "Enhances your Fluff World experience. THIS IS A BETA EXTENSION! PLEASE SUBMIT ALL PROBLEMS YOU HAVE WITH IT TO SOOT!",
     "icons": {
@@ -48,8 +48,6 @@
             "lib/emoji.js",
             "modules/options.js",
             "modules/util.js",
-            "modules/fluffcode.js",
-            "modules/chat.js",
             "modules/visual.js",
             "modules/nicknames.js"
         ]
