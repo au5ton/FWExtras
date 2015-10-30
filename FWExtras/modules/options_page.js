@@ -5,7 +5,7 @@
 *
 */
 
-document.write('This background page is intentionally blank. Please press Ctrl+Shift+I to open the dev tools.');
+//document.write('This background page is intentionally blank. Please press Ctrl+Shift+I to open the dev tools.');
 
 var needsReload = false;
 
@@ -88,7 +88,7 @@ function restore_options() {
         document.getElementById('blackjack_base').checked = items.blackjack_base;
         document.getElementById('loteria_base').checked = items.loteria_base;
         document.getElementById('visuals_emoji').checked = items.visuals_emoji;
-        document.getElementById('home_online_users'.checked = items.home_online_users;
+        document.getElementById('home_online_users').checked = items.home_online_users;
         Materialize.toast('Options restored.',4000);
     });
 }
